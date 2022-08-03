@@ -1,49 +1,56 @@
 using System.Collections.Generic;
-using Effects;
+using BasicStats;
+using BasicStats.Data;
 using Effects.Configs;
 using Effects.Core;
 using Enums;
+using Skills.Configs;
 using Talents;
-using Talents.Configs;
+using Talents.Data;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private List<EffectConfig> _effectsConfigs;
-    [SerializeField] private UnitTalentsConfig _talentsConfig;
+    [SerializeField] protected List<SkillConfig> _skillConfigs;
+    [SerializeField] protected List<EffectConfig> _effectsConfigs;
+    
+    [SerializeField] protected UnitStatsData _statsData;
+    [SerializeField] protected UnitTalentsData _talentsData;
 
-    private UnitEffects _effects;
-    private UnitTalents _talents;
+    public float health;
+    
+    protected UnitBasicStats _basicStats;
+    protected UnitEffects _effects;
+    protected UnitTalents _talents;
 
     private void Start()
     {
+        _basicStats = new UnitBasicStats(_statsData);
         _effects = new UnitEffects();
-        _talents = new UnitTalents(_talentsConfig);
+        _talents = new UnitTalents(_talentsData);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _talents.LevelUp(TalentType.VITALITY);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _effects.AddEffect(new HealthBuffEffect((HealthBuffEffectConfig)_effectsConfigs[0]));
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Debug.Log(GetStat(StatType.MAX_HEALTH));
-        }
-        
         _effects.Update();
     }
 
     public float GetStat(StatType type)
     {
-        float rawValue = _talents.GetStat(type);
-        return _effects.ApplyEffects(type, rawValue);
+        float value = _basicStats[type];
+        _talents.ApplyTalents(type, ref value);
+        _effects.ApplyEffects(type, ref value);
+        value = Mathf.Clamp(value, 0, float.MaxValue);
+        return value;
+    }
+
+    public void AddDamage(float damage)
+    {
+        health -= damage;
+    }
+
+    public void AddEffect(Effect effect)
+    {
+        _effects.AddEffect(effect);
     }
 }

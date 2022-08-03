@@ -17,9 +17,10 @@ namespace Effects.Core
         {
             for (int i = 0; i < _effects.Count; i++)
             {
+                _effects[i].Update();
                 _effects[i].duration -= Time.deltaTime;
 
-                if (_effects[i].duration <= 0.0f)
+                if (_effects[i].duration < 0.0f)
                 {
                     RemoveEffect(_effects[i]);
                     i--;
@@ -42,7 +43,7 @@ namespace Effects.Core
             Debug.Log("Removed: " + effect);
         }
 
-        public float ApplyEffects(StatType type, float basicValue)
+        public void ApplyEffects(StatType type, ref float basicValue)
         {
             float raw = 0.0f;
             float percentage = 0.0f;
@@ -58,8 +59,6 @@ namespace Effects.Core
 
             basicValue += raw;
             basicValue *= (1.0f + percentage);
-
-            return Mathf.Clamp(basicValue, 0, float.MaxValue);
         }
     }
 }

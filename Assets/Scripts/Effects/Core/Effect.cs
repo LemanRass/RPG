@@ -8,5 +8,7 @@ namespace Effects.Core
         public float percentValue;
         public StatType statType;
         public float duration;
+        
+        public virtual void Update() {}
     }
 }

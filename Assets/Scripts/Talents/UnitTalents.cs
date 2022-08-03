@@ -1,52 +1,74 @@
 using System.Collections.Generic;
+using Configs;
 using Enums;
-using Talents.Configs;
+using Talents.Data;
 using UnityEngine;
 
 namespace Talents
 {
     public class UnitTalents
     {
-        private readonly Dictionary<TalentType, int> _talents;
-        private readonly Dictionary<StatType, TalentType> _statTalents;
-        private readonly Dictionary<StatType, List<float>> _statsTable;
+        private readonly Dictionary<TalentType, UnitTalentData> _talents;
 
-        public UnitTalents(UnitTalentsConfig config)
+        public UnitTalents(UnitTalentsData data)
         {
-            _talents = new Dictionary<TalentType, int>();
-            _statTalents = new Dictionary<StatType, TalentType>();
-            _statsTable = new Dictionary<StatType, List<float>>();
+            _talents = new Dictionary<TalentType, UnitTalentData>();
 
-            for (int i = 0; i < config.talents.Count; i++)
+            for (int i = 0; i < data.talents.Count; i++)
             {
-                var talent = config.talents[i];
-                _talents.Add(talent.type, 1);
-
-                for (int j = 0; j < talent.stats.Count; j++)
-                {
-                    var stat = talent.stats[j];
-                    _statTalents.Add(stat.type, talent.type);
-                    _statsTable.Add(stat.type, new List<float>());
-
-                    for (int k = 0; k < stat.levels.Count; k++)
-                    {
-                        _statsTable[stat.type].Add(stat.levels[k]);                        
-                    }
-                }
+                var talent = data.talents[i];
+                _talents.Add(talent.type, talent);
             }
         }
 
-        public float GetStat(StatType statType)
+        public void ApplyTalents(StatType statType, ref float value)
         {
-            var talentType = _statTalents[statType];
-            var talentLevel = _talents[talentType];
-            return _statsTable[statType][talentLevel - 1];
+            var talentType = ConfigsManager.statTalents[statType];
+            var talentLevel = _talents[talentType].level;
+            value += ConfigsManager.statLevels[statType][talentLevel - 1];
         }
 
-        public void LevelUp(TalentType talentType)
+        public void AddExperience(TalentType talentType, int exp)
         {
-            _talents[talentType]++;
-            Debug.Log($"[{talentType.ToString()}] is {_talents[talentType]} now.");
+            if (IsTalentMaxLevel(talentType))
+                return;
+            
+            var talent = _talents[talentType];
+            var talentConfig = ConfigsManager.talents[talentType];
+
+            talent.experience += exp;
+            Debug.Log($"[{talentType}] Experience: {talent.experience}/{talentConfig.levels[talent.level].experience}");
+            
+            while (talent.experience >= talentConfig.levels[talent.level].experience)
+            {
+                if (IsTalentMaxLevel(talentType))
+                {
+                    Debug.Log($"[{talentType}] Already max level!");
+                    return;
+                }
+                
+                LevelUp(talentType);
+            }
+        }
+        
+        private void LevelUp(TalentType talentType)
+        {
+            var talent = _talents[talentType];
+            var talentConfig = ConfigsManager.talents[talentType];
+            
+            talent.experience -= talentConfig.levels[talent.level].experience;
+            _talents[talentType].level++;
+            
+            Debug.Log($"[{talentType.ToString()}] is {_talents[talentType].level} now. " +
+                      $"Exp: {talent.experience}/{talentConfig.levels[talent.level].experience}");
+        }
+
+        private bool IsTalentMaxLevel(TalentType talentType)
+        {
+            var talent = _talents[talentType];
+            var talentConfig = ConfigsManager.talents[talentType];
+
+            return talent.level >= talentConfig.levels.Count - 1;
         }
     }
 }
