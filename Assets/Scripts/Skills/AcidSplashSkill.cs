@@ -1,18 +1,19 @@
 using Effects;
-using Skills.Configs;
+using Enums;
+using Skills.Core;
 using UnityEngine;
 
 namespace Skills
 {
+    [CreateAssetMenu(fileName = "AcidSplashSkill", menuName = "Unit/Skills/AcidSplashSkill")]
     public class AcidSplashSkill : Skill
     {
-        public AcidSplashSkillConfig _config;
+        public EffectType effectType;
+        public float radius;
         
-        public AcidSplashSkill(Unit sender, Unit receiver, SkillConfig config) : base(sender, receiver, config)
+        public override void Execute(Unit sender, Unit receiver)
         {
-            _config = config as AcidSplashSkillConfig;
-            
-            var colliders = Physics.OverlapSphere(receiver.transform.position, _config.radius);
+            var colliders = Physics.OverlapSphere(receiver.transform.position, radius);
 
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -22,8 +23,8 @@ namespace Skills
                     if (unit == sender)
                         continue;
 
-                    var acidEffect = new AcidEffect(unit, _config.duration, _config.interval, _config.damage);
-                    unit.AddEffect(acidEffect);
+                    unit.AddDamage(10.0f);
+                    unit.effects.AddEffect(effectType, 2);
                 }
             }
         }

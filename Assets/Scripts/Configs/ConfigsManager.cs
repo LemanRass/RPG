@@ -1,69 +1,65 @@
 using System.Collections.Generic;
-using Configs.Stats;
-using Configs.Talents;
+using Effects.Core;
 using Enums;
-using Talents.Configs;
 using UnityEngine;
 
 namespace Configs
 {
     public static class ConfigsManager
     {
-        public static Dictionary<StatType, List<float>> statLevels { get; private set; }
-        public static Dictionary<StatType, TalentType> statTalents { get; private set; }
-        public static Dictionary<TalentType, TalentConfig> talents { get; private set; }
+        public static Dictionary<TalentType, TalentLevelsConfig> talentsLevels { get; private set; }
+        public static Dictionary<StatType, StatLevelsConfig> statsLevels { get; private set; }
+        public static Dictionary<EffectType, Effect> effects { get; private set; }
 
         
         static ConfigsManager()
         {
             LoadTalents();
-            LoadStatsProgression();
+            LoadStats();
+            LoadEffects();
         }
 
-        private static void LoadTalents()
+        private static void LoadEffects()
         {
-            statTalents = new Dictionary<StatType, TalentType>();
-            talents = new Dictionary<TalentType, TalentConfig>();
-            statLevels = new Dictionary<StatType, List<float>>();
+            effects = new Dictionary<EffectType, Effect>();
+            var effectsConfigs = Resources.LoadAll<Effect>("Configs/Effects");
             
-            var talentsConfig = Resources.Load<TalentsConfig>("Configs/UnitTalentsConfig");
-
-            for (int i = 0; i < talentsConfig.talents.Count; i++)
+            for (int i = 0; i < effectsConfigs.Length; i++)
             {
-                var talent = talentsConfig.talents[i];
-                talents.Add(talent.type, talent);
-
-                for (int j = 0; j < talent.stats.Count; j++)
-                {
-                    var stat = talent.stats[j];
-                    statTalents.Add(stat.type, talent.type);
-                    
-                    statLevels.Add(stat.type, new List<float>());
-                    for (int k = 0; k < stat.levels.Count; k++)
-                    {
-                        var level = stat.levels[k];
-                        statLevels[stat.type].Add(level.value);
-                    }
-                }
+                var effect = effectsConfigs[i];
+                effects.Add(effect.type, effect);
             }
+            
+            Debug.Log($"[ConfigsManager]Loaded {effects.Count} effects.");
         }
         
-        private static void LoadStatsProgression()
+        private static void LoadTalents()
         {
-            statLevels = new Dictionary<StatType, List<float>>();
-            var config = Resources.LoadAll<StatConfig>("Configs/Progressions");
+            talentsLevels = new Dictionary<TalentType, TalentLevelsConfig>();
+            var talentsConfigs = Resources.LoadAll<TalentLevelsConfig>("Configs/Talents");
 
-            for (int i = 0; i < config.Length; i++)
+            for (int i = 0; i < talentsConfigs.Length; i++)
             {
-                var stat = config[i];
-                statLevels.Add(stat.type, new List<float>());
-
-                for (int j = 0; j < stat.levels.Count; j++)
-                {
-                    var level = stat.levels[j];
-                    statLevels[stat.type].Add(level.value);
-                }
+                var talentConfig = talentsConfigs[i];
+                talentsLevels.Add(talentConfig.talentType, talentConfig);
             }
+            
+            Debug.Log($"[ConfigsManager]Loaded {talentsLevels.Count} talents.");
+        }
+
+        private static void LoadStats()
+        {
+            statsLevels = new Dictionary<StatType, StatLevelsConfig>();
+            var statsConfigs = Resources.LoadAll<StatLevelsConfig>("Configs/Stats");
+
+            for (int i = 0; i < statsConfigs.Length; i++)
+            {
+                var statConfig = statsConfigs[i];
+                statsLevels.Add(statConfig.statType, statConfig);
+            }
+            
+            
+            Debug.Log($"[ConfigsManager]Loaded {statsLevels.Count} stats.");
         }
     }
 }

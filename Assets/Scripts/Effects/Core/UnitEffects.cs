@@ -1,60 +1,57 @@
 using System.Collections.Generic;
+using Configs;
 using Enums;
-using UnityEngine;
 
 namespace Effects.Core
 {
     public class UnitEffects
     {
-        private readonly List<Effect> _effects;
+        private Unit _owner;
+        public readonly Dictionary<EffectType, Effect> effects;
         
-        public UnitEffects()
+        public UnitEffects(Unit owner)
         {
-            _effects = new List<Effect>();
+            _owner = owner;
+            effects = new Dictionary<EffectType, Effect>();
         }
 
         public void Update()
         {
-            for (int i = 0; i < _effects.Count; i++)
+            foreach (var effect in effects.Values)
             {
-                _effects[i].Update();
-                _effects[i].duration -= Time.deltaTime;
+                effect.Update();
 
-                if (_effects[i].duration < 0.0f)
+                if (effect.isFinished)
                 {
-                    RemoveEffect(_effects[i]);
-                    i--;
+                    RemoveEffect(effect);
                 }
             }
         }
         
-        public void AddEffect(Effect effect)
+        public void AddEffect(EffectType effectType, int level)
         {
-            if (_effects.Contains(effect))
+            if (effects.ContainsKey(effectType))
                 return;
 
-            _effects.Add(effect);
-            Debug.Log(effect.ToString());
+            var effect = ConfigsManager.effects[effectType];
+            effect.Execute(_owner, level);
+            effects.Add(effectType, effect);
         }
 
         public void RemoveEffect(Effect effect)
         {
-            _effects.Remove(effect);
-            Debug.Log("Removed: " + effect);
+            effects.Remove(effect.type);
         }
 
         public void ApplyEffects(StatType type, ref float basicValue)
         {
             float raw = 0.0f;
             float percentage = 0.0f;
-            
-            for (int i = 0; i < _effects.Count; i++)
+
+            foreach (var effect in effects.Values)
             {
-                if (_effects[i].statType == type)
-                {
-                    raw += _effects[i].rawValue;
-                    percentage += _effects[i].percentValue;
-                }
+                raw += effect.CalculateRawValue(type);
+                percentage += effect.CalculatePercentageValue(type);
             }
 
             basicValue += raw;

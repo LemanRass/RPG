@@ -1,7 +1,6 @@
-using Effects;
-using Effects.Configs;
+using System.Collections;
 using Enums;
-using Skills;
+using Inventory;
 using UnityEngine;
 
 public class PlayerUnit : Unit
@@ -10,27 +9,24 @@ public class PlayerUnit : Unit
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _talents.AddExperience(TalentType.VITALITY, 5);
+            var currHealth = GetStat(StatType.MAX_HEALTH);
+            Debug.Log($"Current health: {currHealth}");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _effects.AddEffect(new HealthBuffEffect((HealthBuffEffectConfig)_effectsConfigs[0]));
+            talents.talents[TalentType.VITALITY].level++;
+            Debug.Log($"Vitality is {talents.talents[TalentType.VITALITY]} level.");
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Debug.Log(GetStat(StatType.MAX_HEALTH));
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //var skill = new LightningSkill();
-            //skill.Execute(this, this);
-            //new ExplosionSkill(this, this);
-            new AcidSplashSkill(this, this, _skillConfigs[0]);
-        }
-            
+        
         base.Update();
+    }
+
+    private IEnumerator EquipItem(Item item)
+    {
+        Debug.Log("Start equipping...");
+        yield return new WaitForSeconds(1.0f);
+        equipment.Equip(item);
+        Debug.Log("Equipped!");
     }
 }

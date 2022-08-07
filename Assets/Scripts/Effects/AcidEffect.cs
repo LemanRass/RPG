@@ -1,32 +1,55 @@
+using System;
+using System.Collections.Generic;
 using Effects.Core;
 using UnityEngine;
 
 namespace Effects
 {
-    public class AcidEffect : Effect
+    [Serializable]
+    public class AcidEffectLevel
     {
-        public Unit target;
+        public float duration;
         public float interval;
         public float damage;
-        private float _ticks;
+    }
+    
+    [CreateAssetMenu(fileName = "AcidEffect", menuName = "Unit/Effects/AcidEffect")]
+    public class AcidEffect : Effect
+    {
+        public List<AcidEffectLevel> levels;
+        
+        public int level { get; private set; }
+        private Unit _owner;
+        
+        private float _intervalTicks;
+        public float durationTicks { get; private set; }
 
-        public AcidEffect(Unit target, float duration, float interval, float damage)
+        public override void Execute(Unit owner, int level)
         {
-            this.target = target;
-            this.duration = duration;
-            this.interval = interval;
-            this.damage = damage;
+            _owner = owner;
+            this.level = level;
+            
+            _intervalTicks = 0.0f;
+            durationTicks = 0.0f;
         }
-
+        
         public override void Update()
         {
-            _ticks += Time.deltaTime;
-
-            if (_ticks >= interval)
+            if (isFinished) return;
+            
+            _intervalTicks += Time.deltaTime;
+            durationTicks += Time.deltaTime;
+            
+            if (_intervalTicks >= levels[level].interval)
             {
-                target.AddDamage(damage);
-                _ticks = 0.0f;
-                Debug.Log($"[{target.name}] has {target.health} health now.");
+                _owner.AddDamage(levels[level].damage);
+                _intervalTicks = 0.0f;
+            }
+
+            if (durationTicks > levels[level].duration)
+            {
+                durationTicks = levels[level].duration;
+                isFinished = true;
             }
         }
     }
