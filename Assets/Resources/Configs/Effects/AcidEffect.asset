@@ -12,7 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88d26c740bf48368d7fa9bfc36ef6ca, type: 3}
   m_Name: AcidEffect
   m_EditorClassIdentifier: 
-  duration: 0
-  name: 
+  name: Acid impact
   icon: {fileID: 0}
-  levels: []
+  type: 0
+  levels:
+  - duration: 2.1
+    interval: 1
+    damage: 2
+  - duration: 3.1
+    interval: 1
+    damage: 3
+  - duration: 3.1
+    interval: 1
+    damage: 4
+  - duration: 5.1
+    interval: 1
+    damage: 5
+  - duration: 6.1
+    interval: 1
+    damage: 6

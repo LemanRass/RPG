@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c649eb65de4585a257516e64dd9efa, type: 3}
   m_Name: MaxHealthConfig
   m_EditorClassIdentifier: 
-  statType: 0
-  talentType: 0
-  values: []
+  statType: 3
+  talentType: 2
+  values:
+  - 10
+  - 20
+  - 30

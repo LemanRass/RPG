@@ -1,46 +1,59 @@
 using System.Collections.Generic;
 using Configs;
 using Enums;
+using UnityEngine;
 
 namespace Effects.Core
 {
     public class UnitEffects
     {
-        private Unit _owner;
-        public readonly Dictionary<EffectType, Effect> effects;
+        private readonly Unit _owner;
+        private readonly Dictionary<EffectType, Effect> _effects;
+        private readonly List<EffectType> _effectKeys;
         
         public UnitEffects(Unit owner)
         {
             _owner = owner;
-            effects = new Dictionary<EffectType, Effect>();
+            _effectKeys = new List<EffectType>();
+            _effects = new Dictionary<EffectType, Effect>();
         }
 
         public void Update()
         {
-            foreach (var effect in effects.Values)
+            for (int i = 0; i < _effectKeys.Count; i++)
             {
+                var key = _effectKeys[i];
+                var effect = _effects[key];
+                
                 effect.Update();
 
                 if (effect.isFinished)
                 {
                     RemoveEffect(effect);
+                    i--;
                 }
             }
         }
         
         public void AddEffect(EffectType effectType, int level)
         {
-            if (effects.ContainsKey(effectType))
+            if (_effects.ContainsKey(effectType))
                 return;
 
             var effect = ConfigsManager.effects[effectType];
-            effect.Execute(_owner, level);
-            effects.Add(effectType, effect);
+            effect.Execute(_owner, level - 1);
+            _effects.Add(effectType, effect);
+            _effectKeys.Add(effectType);
+            
+            Debug.Log($"Added effect {effectType} on level {level}.");
         }
 
         public void RemoveEffect(Effect effect)
         {
-            effects.Remove(effect.type);
+            _effects.Remove(effect.type);
+            _effectKeys.Remove(effect.type);
+            
+            Debug.Log($"Removed effect {effect.type}.");
         }
 
         public void ApplyEffects(StatType type, ref float basicValue)
@@ -48,7 +61,7 @@ namespace Effects.Core
             float raw = 0.0f;
             float percentage = 0.0f;
 
-            foreach (var effect in effects.Values)
+            foreach (var effect in _effects.Values)
             {
                 raw += effect.CalculateRawValue(type);
                 percentage += effect.CalculatePercentageValue(type);

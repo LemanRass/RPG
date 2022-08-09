@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Inventory;
+using Configs.Items;
 using UnityEngine;
 
 namespace Equipment
@@ -7,28 +7,22 @@ namespace Equipment
     public class UnitEquipment : MonoBehaviour
     {
         public List<EquipmentSlot> equipmentSlots;
+        public EquipmentSlot this[EquipmentType equipmentType] => GetSlot(equipmentType);
 
         public void Equip(Item item)
         {
             var slot = equipmentSlots.Find(slot => slot.type == item.type);
-
-            if (slot.transform != null)
-            {
-                DeEquip(slot);
-            }
-
-            var itemObject = Instantiate(item, slot.transform);
-            itemObject.transform.localPosition = Vector3.zero;
-            itemObject.transform.localRotation = Quaternion.identity;
-            itemObject.transform.localScale = Vector3.one;
+            slot.Insert(item);
         }
 
-        public void DeEquip(EquipmentSlot slot)
+        public void DeEquip(EquipmentSlot equipmentSlot)
         {
-            foreach (Transform child in slot.transform)
-            {
-                Destroy(child.gameObject);
-            }
+            equipmentSlot.Clear();
+        }
+
+        private EquipmentSlot GetSlot(EquipmentType equipmentType)
+        {
+            return equipmentSlots.Find(n => n.type == equipmentType);
         }
     }
 }

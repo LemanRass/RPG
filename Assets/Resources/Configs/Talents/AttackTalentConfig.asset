@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: AttackTalentConfig
   m_EditorClassIdentifier: 
   talentType: 0
-  experiences: []
+  experiences:
+  - 10
+  - 20
+  - 30
+  - 40
+  - 50

@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
     public UnitEquipment equipment;
     public UnitInventory inventory;
 
-    private void Start()
+    protected virtual void Start()
     {
         basicStats = new UnitBasicStats(_statsData);
         effects = new UnitEffects(this);
@@ -53,6 +53,40 @@ public class Unit : MonoBehaviour
 
     public void UseSkill(SkillType skillType, Unit receiver)
     {
-        //skills.UseSkill(skillType, receiver);
+        if (skills[skillType].CheckIfCanUseSkill(this, receiver))
+        {
+            skills.UseSkill(skillType, this, receiver);
+        }
+    }
+
+    public void AddEffect(EffectType effectType, int level)
+    {
+        effects.AddEffect(effectType, level);
+    }
+
+    public void EquipItem(InventorySlot inventorySlot)
+    {
+        if (inventorySlot.isEmpty)
+            return;
+
+        var item = inventorySlot.item;
+        inventorySlot.Clear();
+        
+        var equipmentSlot = equipment[item.type];
+
+        if (!equipmentSlot.isEmpty)
+        {
+            DeEquipItem(equipmentSlot);
+        }
+        
+        equipmentSlot.Insert(item);
+    }
+
+    public void DeEquipItem(EquipmentSlot equipmentSlot)
+    {
+        var item = equipmentSlot.item;
+        equipment.DeEquip(equipmentSlot);
+        var inventorySlot = inventory.FindFreeSlot();
+        inventorySlot.Insert(item);
     }
 }

@@ -1,21 +1,12 @@
 using Equipment;
 using UnityEngine;
 
-namespace Inventory
+namespace Configs.Items
 {
-    public enum WeaponType
-    {
-        SWORD,
-        BOW
-    }
-
-    public abstract class Weapon : Item
-    {
-        public WeaponType weaponType;
-    }
-    
-    public abstract class Item : MonoBehaviour
+    public abstract class Item : ScriptableObject
     {
         public EquipmentType type;
+        public GameObject onUnitPrefab;
+        public GameObject onGroundPrefab;
     }
 }

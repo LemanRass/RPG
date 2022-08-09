@@ -13,10 +13,26 @@ MonoBehaviour:
   m_Name: AcidSplashSkill
   m_EditorClassIdentifier: 
   type: 2
+  talentType: 0
   requirements:
   - talentType: 0
     level: 2
-  cooldown: 10
+  cooldownDuration: 5
   isCoolingDown: 0
   cooldownTicks: 0
-  radius: 5
+  levels:
+  - talentLevel: 2
+    effectType: 0
+    effectLevel: 1
+    radius: 5
+    damage: 0
+  - talentLevel: 3
+    effectType: 0
+    effectLevel: 2
+    radius: 7
+    damage: 0
+  - talentLevel: 4
+    effectType: 0
+    effectLevel: 3
+    radius: 10
+    damage: 0

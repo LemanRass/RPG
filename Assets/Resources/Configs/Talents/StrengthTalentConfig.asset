@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81822189a144165aefec53f5cf16d01, type: 3}
   m_Name: StrengthTalentConfig
   m_EditorClassIdentifier: 
-  talentType: 0
-  experiences: []
+  talentType: 1
+  experiences:
+  - 10
+  - 20
+  - 30

@@ -14,6 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   icon: {fileID: 0}
-  type: 0
+  type: 1
   statType: 0
-  levels: []
+  levels:
+  - rawValue: 0
+    percentValue: 10
+    duration: 10
+  - rawValue: 0
+    percentValue: 20
+    duration: 20
+  - rawValue: 0
+    percentValue: 30
+    duration: 30

@@ -31,6 +31,8 @@ namespace Effects
             
             _intervalTicks = 0.0f;
             durationTicks = 0.0f;
+
+            isFinished = false;
         }
         
         public override void Update()
@@ -43,6 +45,7 @@ namespace Effects
             if (_intervalTicks >= levels[level].interval)
             {
                 _owner.AddDamage(levels[level].damage);
+                Debug.Log($"[AcidEffect] Add damage: {levels[level].damage}.");
                 _intervalTicks = 0.0f;
             }
 
