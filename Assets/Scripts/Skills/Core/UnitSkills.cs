@@ -8,7 +8,11 @@ namespace Skills.Core
     {
         private readonly Dictionary<SkillType, Skill> _skills;
         private readonly List<SkillType> _skillsKeys;
+        
         public Skill this[SkillType type] => _skills[type];
+        public Skill this[int index] => _skills[_skillsKeys[index]];
+        public int count => _skills.Count;
+        
 
         public UnitSkills()
         {

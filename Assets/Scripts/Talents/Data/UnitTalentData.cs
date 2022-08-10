@@ -8,6 +8,6 @@ namespace Talents.Data
     {
         public TalentType type;
         public int level;
-        public float experience;
+        public int experience;
     }
 }

@@ -7,12 +7,12 @@ public class PlayerUnit : Unit
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            EquipItem(inventory.slots[0]);
+            EquipItem(inventory[0]);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            EquipItem(inventory.slots[1]);
+            EquipItem(inventory[1]);
         }
 
         if (Input.GetKeyDown(KeyCode.L))

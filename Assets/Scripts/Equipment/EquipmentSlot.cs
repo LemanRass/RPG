@@ -1,15 +1,11 @@
-using System;
 using Configs.Items;
-using Inventory;
 using UnityEngine;
 
 namespace Equipment
 {
-    [Serializable]
-    public class EquipmentSlot
+    public class EquipmentSlot : MonoBehaviour
     {
-        public EquipmentType type;
-        public Transform transform;
+        public EquipmentType equipmentType;
         public Item item;
         public bool isEmpty => item == null;
 
@@ -17,7 +13,7 @@ namespace Equipment
         {
             this.item = item;
 
-            var itemGo = GameObject.Instantiate(item.onUnitPrefab, transform);
+            var itemGo = Instantiate(item.onUnitPrefab, transform);
             itemGo.transform.localPosition = Vector3.zero;
             itemGo.transform.localRotation = Quaternion.identity;
             itemGo.transform.localScale = Vector3.one;
@@ -27,7 +23,7 @@ namespace Equipment
         {
             foreach (Transform child in transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Destroy(child.gameObject);
             }
 
             item = null;

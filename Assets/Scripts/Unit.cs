@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected UnitStatsData _statsData;
     [SerializeField] protected UnitTalentsData _talentsData;
 
-    public float health;
+    public float health { get; private set; }
     
     public UnitBasicStats basicStats;
     public UnitEffects effects;
@@ -29,6 +29,8 @@ public class Unit : MonoBehaviour
         effects = new UnitEffects(this);
         talents = new UnitTalents(_talentsData);
         skills = new UnitSkills();
+        equipment = new UnitEquipment(this);
+        inventory = new UnitInventory(32);
     }
 
     protected virtual void Update()
@@ -39,7 +41,7 @@ public class Unit : MonoBehaviour
 
     public float GetStat(StatType type)
     {
-        float value = basicStats[type];
+        float value = basicStats[type].value;
         talents.ApplyTalents(type, ref value);
         equipment.ApplyEquipment(type, ref value);
         effects.ApplyEffects(type, ref value);
@@ -73,7 +75,7 @@ public class Unit : MonoBehaviour
         var item = inventorySlot.item;
         inventorySlot.Clear();
         
-        var equipmentSlot = equipment[item.type];
+        var equipmentSlot = equipment[item.equipmentType];
 
         if (!equipmentSlot.isEmpty)
         {

@@ -1,18 +1,34 @@
 using System.Collections.Generic;
 using Configs.Items;
 using Enums;
-using UnityEngine;
 
 namespace Equipment
 {
-    public class UnitEquipment : MonoBehaviour
+    public class UnitEquipment
     {
-        public List<EquipmentSlot> equipmentSlots;
-        public EquipmentSlot this[EquipmentType equipmentType] => GetSlot(equipmentType);
-
+        private readonly Dictionary<EquipmentType, EquipmentSlot> _equipmentSlots;
+        private readonly List<EquipmentType> _equipmentSlotsKeys;
+        public EquipmentSlot this[EquipmentType equipmentType] => _equipmentSlots[equipmentType];
+        public EquipmentSlot this[int index] => _equipmentSlots[_equipmentSlotsKeys[index]];
+        public int count => _equipmentSlots.Count;
+        
+        public UnitEquipment(Unit owner)
+        {
+            _equipmentSlots = new Dictionary<EquipmentType, EquipmentSlot>();
+            _equipmentSlotsKeys = new List<EquipmentType>();
+            
+            var slots = owner.GetComponentsInChildren<EquipmentSlot>();
+            for (int i = 0; i < slots.Length; i++)
+            {
+                var slot = slots[i];
+                _equipmentSlots.Add(slot.equipmentType, slot);
+                _equipmentSlotsKeys.Add(slot.equipmentType);
+            }
+        }
+        
         public void Equip(Item item)
         {
-            var slot = equipmentSlots.Find(slot => slot.type == item.type);
+            var slot = _equipmentSlots[item.equipmentType];
             slot.Insert(item);
         }
 
@@ -21,16 +37,11 @@ namespace Equipment
             equipmentSlot.Clear();
         }
 
-        private EquipmentSlot GetSlot(EquipmentType equipmentType)
-        {
-            return equipmentSlots.Find(n => n.type == equipmentType);
-        }
-
         public void ApplyEquipment(StatType statType, ref float value)
         {
-            for (int i = 0; i < equipmentSlots.Count; i++)
+            for (int i = 0; i < _equipmentSlotsKeys.Count; i++)
             {
-                var slot = equipmentSlots[i];
+                var slot = _equipmentSlots[_equipmentSlotsKeys[i]];
                 if (slot.isEmpty)
                     continue;
 

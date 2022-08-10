@@ -15,7 +15,7 @@ namespace Configs.Items
     
     public abstract class Item : ScriptableObject
     {
-        public EquipmentType type;
+        public EquipmentType equipmentType;
         public GameObject onUnitPrefab;
         public GameObject onGroundPrefab;
         public List<ItemStat> stats;

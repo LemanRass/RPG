@@ -10,6 +10,9 @@ namespace Effects.Core
         private readonly Unit _owner;
         private readonly Dictionary<EffectType, Effect> _effects;
         private readonly List<EffectType> _effectKeys;
+        public Effect this[EffectType effectType] => _effects[effectType];
+        public Effect this[int index] => _effects[_effectKeys[index]];
+        public int count => _effects.Count;
         
         public UnitEffects(Unit owner)
         {
@@ -47,6 +50,8 @@ namespace Effects.Core
             
             Debug.Log($"Added effect {effectType} on level {level}.");
         }
+
+        public bool ContainsEffect(EffectType effectType) => _effects.ContainsKey(effectType);
 
         public void RemoveEffect(Effect effect)
         {
