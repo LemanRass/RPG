@@ -3,6 +3,7 @@ namespace Enums
     public enum EffectType
     {
         ACID,
-        HEALTH_BUFF
+        HEALTH_BUFF,
+        DAMAGE_BUFF
     }
 }

@@ -41,6 +41,7 @@ public class Unit : MonoBehaviour
     {
         float value = basicStats[type];
         talents.ApplyTalents(type, ref value);
+        equipment.ApplyEquipment(type, ref value);
         effects.ApplyEffects(type, ref value);
         value = Mathf.Clamp(value, 0, float.MaxValue);
         return value;

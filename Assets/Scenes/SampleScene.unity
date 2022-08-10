@@ -411,10 +411,13 @@ MonoBehaviour:
   equipmentSlots:
   - type: 1
     transform: {fileID: 1246008969}
+    item: {fileID: 0}
   - type: 2
     transform: {fileID: 1530780964}
+    item: {fileID: 0}
   - type: 0
     transform: {fileID: 1303087205}
+    item: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,10 +737,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479102d072774ffab771553febaa074e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 6892339090502556899, guid: 442c0b875dc8f43c08605aadafcef94e, type: 3}
-  - {fileID: 2578403944975274245, guid: f7df0268d82d04652a38d64961532448, type: 3}
-  - {fileID: 477557274483281377, guid: dbb19dd1d76db4eff8a95c8834d02e8e, type: 3}
+  slots:
+  - item: {fileID: 11400000, guid: 849b744078c574fecb877a0d10d7713f, type: 2}
+  - item: {fileID: 11400000, guid: 4234dd08b9ffa47c484caf86f71b651a, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
 --- !u!1 &1530780963
 GameObject:
   m_ObjectHideFlags: 0

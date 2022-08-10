@@ -9,30 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4308240168bb48aaad758e63b4614541, type: 3}
-  m_Name: AcidSplashSkill
+  m_Script: {fileID: 11500000, guid: 8df6bec125714f298d4a6bf0a9852179, type: 3}
+  m_Name: DamageBuffSkill
   m_EditorClassIdentifier: 
-  type: 0
-  talentType: 0
-  requirements:
-  - talentType: 0
-    level: 2
-  cooldownDuration: 5
+  type: 1
+  talentType: 1
+  requirements: []
+  cooldownDuration: 10
   isCoolingDown: 0
   cooldownTicks: 0
   levels:
-  - talentLevel: 2
-    effectType: 0
+  - talentLevel: 1
+    effectType: 2
     effectLevel: 1
-    radius: 5
-    damage: 10
-  - talentLevel: 3
-    effectType: 0
+  - talentLevel: 2
+    effectType: 2
     effectLevel: 2
-    radius: 7
-    damage: 20
-  - talentLevel: 4
-    effectType: 0
+  - talentLevel: 3
+    effectType: 2
     effectLevel: 3
-    radius: 10
-    damage: 30

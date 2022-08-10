@@ -19,6 +19,6 @@ namespace Inventory
             return null;
         }
 
-        public int ItemsCount => slots.Count(slot => !slot.isEmpty);
+        public int ItemsCount() => slots.Count(slot => !slot.isEmpty);
     }
 }

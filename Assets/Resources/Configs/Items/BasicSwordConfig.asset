@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: BasicSwordConfig
   m_EditorClassIdentifier: 
   type: 0
-  onUnitPrefab: {fileID: 0}
+  onUnitPrefab: {fileID: 2338693942505700605, guid: 442c0b875dc8f43c08605aadafcef94e, type: 3}
   onGroundPrefab: {fileID: 0}
-  minDamage: 0
-  maxDamage: 0
+  stats: []

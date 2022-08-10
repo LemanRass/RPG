@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: CrimsonSword
   m_EditorClassIdentifier: 
   type: 0
-  onUnitPrefab: {fileID: 0}
-  onGroundPrefab: {fileID: 0}
-  minDamage: 0
-  maxDamage: 0
+  onUnitPrefab: {fileID: 4431170907196159119, guid: dbb19dd1d76db4eff8a95c8834d02e8e, type: 3}
+  onGroundPrefab: {fileID: 6608028290764116900, guid: 05ab1e147dda1482286035973b32e275, type: 3}
+  stats:
+  - statType: 1
+    value: 10
+  - statType: 2
+    value: 17
