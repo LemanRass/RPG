@@ -11,6 +11,7 @@ namespace Effects.Core
         public bool isFinished { get; protected set; }
 
         public abstract void Execute(Unit owner, int level);
+        public abstract void Dispose();
         public virtual void Update() { }
         public virtual float CalculateRawValue(StatType statType) => 0.0f;
         public virtual float CalculatePercentageValue(StatType statType) => 0.0f;

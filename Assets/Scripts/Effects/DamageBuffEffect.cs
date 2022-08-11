@@ -24,7 +24,7 @@ namespace Effects
     [CreateAssetMenu(fileName = "DamageBuffEffect", menuName = "Unit/Effects/DamageBuffEffect")]
     public class DamageBuffEffect : Effect
     {
-        [SerializeField] private List<DamageBuffEffectLevel> _levels;
+        public List<DamageBuffEffectLevel> _levels;
 
         private Unit _owner;
         private DamageBuffEffectLevel _level;
@@ -34,9 +34,14 @@ namespace Effects
         public override void Execute(Unit owner, int level)
         {
             _owner = owner;
-            _level = _levels[level];
+            _level = _levels[level - 1];
             _durationTicks = 0.0f;            
             isFinished = false;
+        }
+
+        public override void Dispose()
+        {
+            isFinished = true;
         }
 
         public override void Update()

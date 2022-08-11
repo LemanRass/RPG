@@ -34,7 +34,12 @@ namespace Effects
 
             isFinished = false;
         }
-        
+
+        public override void Dispose()
+        {
+            isFinished = true;
+        }
+
         public override void Update()
         {
             if (isFinished) return;

@@ -44,11 +44,19 @@ namespace Effects.Core
                 return;
 
             var effect = ConfigsManager.effects[effectType];
-            effect.Execute(_owner, level - 1);
+            effect.Execute(_owner, level);
             _effects.Add(effectType, effect);
             _effectKeys.Add(effectType);
             
             Debug.Log($"Added effect {effectType} on level {level}.");
+        }
+
+        public void RemoveEffect(EffectType effectType)
+        {
+            if (_effects.ContainsKey(effectType))
+            {
+                _effects[effectType].Dispose();
+            }
         }
 
         public bool ContainsEffect(EffectType effectType) => _effects.ContainsKey(effectType);
