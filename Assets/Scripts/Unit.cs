@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using BasicStats;
 using BasicStats.Data;
+using Configs.Items;
 using Effects.Core;
 using Enums;
 using Equipment;
 using Inventory;
+using Inventory.Data;
 using Skills.Core;
 using Talents;
 using Talents.Data;
@@ -13,6 +16,7 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] protected UnitStatsData _statsData;
     [SerializeField] protected UnitTalentsData _talentsData;
+    [SerializeField] protected UnitInventoryData _inventoryData; 
 
     public float health { get; private set; }
     
@@ -30,7 +34,7 @@ public class Unit : MonoBehaviour
         talents = new UnitTalents(_talentsData);
         skills = new UnitSkills();
         equipment = new UnitEquipment(this);
-        inventory = new UnitInventory(32);
+        inventory = new UnitInventory(_inventoryData);
     }
 
     protected virtual void Update()
@@ -67,7 +71,7 @@ public class Unit : MonoBehaviour
         effects.AddEffect(effectType, level);
     }
 
-    public void EquipItem(InventorySlot inventorySlot)
+    public void UseInventorySlot(InventorySlot inventorySlot)
     {
         if (inventorySlot.isEmpty)
             return;
@@ -79,14 +83,17 @@ public class Unit : MonoBehaviour
 
         if (!equipmentSlot.isEmpty)
         {
-            DeEquipItem(equipmentSlot);
+            UseEquipmentSlot(equipmentSlot);
         }
         
         equipmentSlot.Insert(item);
     }
 
-    public void DeEquipItem(EquipmentSlot equipmentSlot)
+    public void UseEquipmentSlot(EquipmentSlot equipmentSlot)
     {
+        if (equipmentSlot.isEmpty)
+            return;
+        
         var item = equipmentSlot.item;
         equipment.DeEquip(equipmentSlot);
         var inventorySlot = inventory.FindFreeSlot();

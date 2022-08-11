@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92128309c5a4535a3553a6a38daccb1, type: 3}
   m_Name: BasicSwordConfig
   m_EditorClassIdentifier: 
-  type: 0
+  name: Basic Sword
+  icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
+  equipmentType: 0
   onUnitPrefab: {fileID: 2338693942505700605, guid: 442c0b875dc8f43c08605aadafcef94e, type: 3}
   onGroundPrefab: {fileID: 0}
   stats: []

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Configs.Items;
+using Inventory.Data;
 
 namespace Inventory
 {
@@ -11,12 +12,12 @@ namespace Inventory
         public int capacity => _slots.Count;
         public int itemsCount => _slots.Count(slot => !slot.isEmpty);
 
-        public UnitInventory(int capacity)
+        public UnitInventory(UnitInventoryData inventoryData)
         {
-            _slots = new List<InventorySlot>(capacity);
-            for (int i = 0; i < capacity; i++)
+            _slots = new List<InventorySlot>(inventoryData.items.Count);
+            for (int i = 0; i < inventoryData.items.Count; i++)
             {
-                _slots.Add(new InventorySlot());
+                _slots.Add(new InventorySlot(inventoryData.items[i]));
             }
         }
         
