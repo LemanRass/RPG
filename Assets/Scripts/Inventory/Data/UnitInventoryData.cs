@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Configs.Items;
+using Configs.Items.Core;
 using UnityEngine;
 
 namespace Inventory.Data

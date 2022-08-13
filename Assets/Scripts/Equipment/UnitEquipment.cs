@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Configs.Items;
+using Configs.Items.Core;
 using Enums;
+using Inventory;
 
 namespace Equipment
 {
@@ -26,7 +28,7 @@ namespace Equipment
             }
         }
         
-        public void Equip(Item item)
+        public void Equip(IEquipment item)
         {
             var slot = _equipmentSlots[item.equipmentType];
             slot.Insert(item);
@@ -35,6 +37,21 @@ namespace Equipment
         public void DeEquip(EquipmentSlot equipmentSlot)
         {
             equipmentSlot.Clear();
+        }
+
+        public void DropInventorySlot(InventorySlot from, EquipmentSlot to)
+        {
+            var fromItem = from.item;
+            var toItem = (Item)to.item;
+
+            if (fromItem is IEquipment equipment)
+            {
+                if (equipment.equipmentType == to.equipmentType)
+                {
+                    to.Insert(equipment);
+                    from.Insert(toItem);
+                }
+            }
         }
 
         public void ApplyEquipment(StatType statType, ref float value)

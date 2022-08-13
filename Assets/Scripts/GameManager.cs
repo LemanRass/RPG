@@ -1,4 +1,4 @@
-using System;
+using UI.Game;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour

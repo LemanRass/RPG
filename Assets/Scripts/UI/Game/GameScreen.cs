@@ -11,6 +11,7 @@ namespace UI.Game
 
         private void Start()
         {
+            _inventoryWidget.Init();
             _inventoryBtn.onClick.AddListener(OnInventoryBtnClick);
         }
 

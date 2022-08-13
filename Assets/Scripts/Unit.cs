@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BasicStats;
 using BasicStats.Data;
 using Configs.Items;
+using Configs.Items.Core;
 using Effects.Core;
 using Enums;
 using Equipment;
@@ -27,7 +28,7 @@ public class Unit : MonoBehaviour
     public UnitEquipment equipment;
     public UnitInventory inventory;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         basicStats = new UnitBasicStats(_statsData);
         effects = new UnitEffects(this);
@@ -71,14 +72,8 @@ public class Unit : MonoBehaviour
         effects.AddEffect(effectType, level);
     }
 
-    public void UseInventorySlot(InventorySlot inventorySlot)
+    private void EquipItem(IEquipment item)
     {
-        if (inventorySlot.isEmpty)
-            return;
-
-        var item = inventorySlot.item;
-        inventorySlot.Clear();
-        
         var equipmentSlot = equipment[item.equipmentType];
 
         if (!equipmentSlot.isEmpty)
@@ -89,6 +84,20 @@ public class Unit : MonoBehaviour
         equipmentSlot.Insert(item);
     }
 
+    public void UseInventorySlot(InventorySlot inventorySlot)
+    {
+        if (inventorySlot.isEmpty)
+            return;
+
+        switch (inventorySlot.item)
+        {
+            case IEquipment equipmentItem:
+                inventorySlot.Clear();
+                EquipItem(equipmentItem);
+                break;
+        }
+    }
+    
     public void UseEquipmentSlot(EquipmentSlot equipmentSlot)
     {
         if (equipmentSlot.isEmpty)
@@ -97,6 +106,21 @@ public class Unit : MonoBehaviour
         var item = equipmentSlot.item;
         equipment.DeEquip(equipmentSlot);
         var inventorySlot = inventory.FindFreeSlot();
-        inventorySlot.Insert(item);
+        inventorySlot.Insert((Item)item);
+    }
+
+    public void DropInventorySlotIntoInventorySlot(InventorySlot from, InventorySlot to)
+    {
+        inventory.DropInventorySlot(from, to);
+    }
+
+    public void DropInventorySlotIntoEquipmentSlot(InventorySlot from, EquipmentSlot to)
+    {
+        equipment.DropInventorySlot(from, to);
+    }
+
+    public void DropEquipmentSlotIntoInventorySlot(EquipmentSlot from, InventorySlot to)
+    {
+        inventory.DropEquipmentSlot(from, to);
     }
 }

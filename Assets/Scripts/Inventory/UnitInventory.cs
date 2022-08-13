@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Configs.Items;
+using Configs.Items.Core;
+using Equipment;
 using Inventory.Data;
 
 namespace Inventory
@@ -19,6 +21,24 @@ namespace Inventory
             {
                 _slots.Add(new InventorySlot(inventoryData.items[i]));
             }
+        }
+
+        public void DropInventorySlot(InventorySlot from, InventorySlot to)
+        {
+            var fromItem = from.item;
+            var toItem = to.item;
+        
+            from.Insert(toItem);
+            to.Insert(fromItem);
+        }
+
+        public void DropEquipmentSlot(EquipmentSlot from, InventorySlot to)
+        {
+            var fromItem = (Item)from.item;
+            var toItem = to.item;
+        
+            from.Insert((IEquipment)toItem);
+            to.Insert(fromItem);
         }
         
         public InventorySlot FindFreeSlot()

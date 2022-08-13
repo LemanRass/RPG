@@ -4,6 +4,16 @@ namespace Equipment
     {
         RIGHT_HAND,
         LEFT_HAND,
-        HEAD
+        HEAD,
+        BODY,
+        PANTS,
+        BOOTS,
+        COAT,
+        AMULET,
+        GLOVES,
+        BELT,
+        FIRST_RING,
+        SECOND_RING,
+        BAG
     }
 }

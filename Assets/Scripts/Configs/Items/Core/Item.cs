@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using Enums;
-using Equipment;
 using UnityEngine;
 
-namespace Configs.Items
+namespace Configs.Items.Core
 {
     [Serializable]
     public class ItemStat
@@ -17,9 +15,6 @@ namespace Configs.Items
     {
         public string name;
         public Sprite icon;
-        public EquipmentType equipmentType;
-        public GameObject onUnitPrefab;
         public GameObject onGroundPrefab;
-        public List<ItemStat> stats;
     }
 }

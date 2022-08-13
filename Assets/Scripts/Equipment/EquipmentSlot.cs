@@ -1,4 +1,5 @@
-using Configs.Items;
+using System;
+using Configs.Items.Core;
 using UnityEngine;
 
 namespace Equipment
@@ -6,27 +7,33 @@ namespace Equipment
     public class EquipmentSlot : MonoBehaviour
     {
         public EquipmentType equipmentType;
-        public Item item;
+        public IEquipment item;
+        private GameObject _itemGameObject;
         public bool isEmpty => item == null;
 
-        public void Insert(Item item)
+        public event Action<IEquipment> onChanged;
+
+        public void Insert(IEquipment item)
         {
             this.item = item;
 
-            var itemGo = Instantiate(item.onUnitPrefab, transform);
-            itemGo.transform.localPosition = Vector3.zero;
-            itemGo.transform.localRotation = Quaternion.identity;
-            itemGo.transform.localScale = Vector3.one;
+            if (item != null && item.onUnitPrefab != null)
+            {
+                _itemGameObject = Instantiate(item.onUnitPrefab, transform);
+                _itemGameObject.transform.localPosition = Vector3.zero;
+                _itemGameObject.transform.localRotation = Quaternion.identity;
+                _itemGameObject.transform.localScale = Vector3.one;
+            }
+            
+            onChanged?.Invoke(item);
         }
         
         public void Clear()
         {
-            foreach (Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
-
+            Destroy(_itemGameObject);
             item = null;
+            
+            onChanged?.Invoke(item);
         }
     }
 }
