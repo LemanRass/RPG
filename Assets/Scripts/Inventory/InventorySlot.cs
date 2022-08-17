@@ -42,9 +42,6 @@ namespace Inventory
 
         private void OnChanged()
         {
-            if (item is { count: < 1 })
-                Clear();
-            
             onChanged?.Invoke(item);
         }
     }

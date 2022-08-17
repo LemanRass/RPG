@@ -96,6 +96,8 @@ public class Unit : MonoBehaviour
             
             case RemedyItemData remedyItem:
                 remedyItem.Use(this);
+                if (remedyItem.count < 1)
+                    inventorySlot.Clear();
                 break;
         }
     }

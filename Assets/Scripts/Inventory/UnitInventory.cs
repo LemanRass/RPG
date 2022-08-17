@@ -26,7 +26,7 @@ namespace Inventory
                 }
                 else
                 {
-                    var item = inventoryItem.config.CreateInstance();
+                    var item = Factory.Create(inventoryItem.config.type);
                     item.count = inventoryItem.count;
                     _slots.Add(new InventorySlot(item));
                 }
@@ -97,7 +97,7 @@ namespace Inventory
             if (to.isEmpty)
             {
                 var fromItem = from.item;
-                var toItem = fromItem.config.CreateInstance();
+                var toItem = Factory.Create(fromItem.config.type);
                 to.Insert(toItem);
 
                 fromItem.count -= count;
