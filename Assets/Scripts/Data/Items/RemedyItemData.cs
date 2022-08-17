@@ -14,7 +14,7 @@ namespace Data.Items
 
         public void Use(Unit unit)
         {
-            unit.AddEffect(config.effect.type, config.effectLevel);
+            unit.AddEffect(config.effectType, config.effectLevel);
             count--;
             OnChanged();
         }

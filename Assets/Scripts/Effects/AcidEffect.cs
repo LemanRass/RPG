@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
+using Configs.Effects;
 using Effects.Core;
 using UnityEngine;
 
 namespace Effects
 {
-    [Serializable]
-    public class AcidEffectLevel
-    {
-        public float duration;
-        public float interval;
-        public float damage;
-    }
-    
-    [CreateAssetMenu(fileName = "AcidEffect", menuName = "Unit/Effects/AcidEffect")]
     public class AcidEffect : Effect
     {
-        public List<AcidEffectLevel> levels;
+        public new readonly AcidEffectConfig config;
+        public AcidEffect(AcidEffectConfig config) : base(config)
+        {
+            this.config = config;
+        }
         
         public int level { get; private set; }
         private Unit _owner;
@@ -47,16 +41,16 @@ namespace Effects
             _intervalTicks += Time.deltaTime;
             durationTicks += Time.deltaTime;
             
-            if (_intervalTicks >= levels[level].interval)
+            if (_intervalTicks >= config.levels[level].interval)
             {
-                _owner.AddDamage(levels[level].damage);
-                Debug.Log($"[AcidEffect] Add damage: {levels[level].damage}.");
+                _owner.AddDamage(config.levels[level].damage);
+                Debug.Log($"[AcidEffect] Add damage: {config.levels[level].damage}.");
                 _intervalTicks = 0.0f;
             }
 
-            if (durationTicks > levels[level].duration)
+            if (durationTicks > config.levels[level].duration)
             {
-                durationTicks = levels[level].duration;
+                durationTicks = config.levels[level].duration;
                 isFinished = true;
             }
         }

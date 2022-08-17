@@ -1,5 +1,6 @@
 using Data.Items;
 using Effects.Core;
+using Enums;
 using UnityEngine;
 
 namespace Configs.Items
@@ -7,7 +8,7 @@ namespace Configs.Items
     [CreateAssetMenu(fileName = "RemedyItemConfig", menuName = "Unit/Items/RemedyItemConfig")]
     public class RemedyItemConfig : ItemConfig
     {
-        public Effect effect;
+        public EffectType effectType;
         public int effectLevel;
         
         public override ItemData CreateInstance()

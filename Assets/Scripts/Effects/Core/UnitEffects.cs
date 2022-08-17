@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Configs;
 using Enums;
 using UnityEngine;
 
@@ -43,7 +42,7 @@ namespace Effects.Core
             if (_effects.ContainsKey(effectType))
                 return;
 
-            var effect = ConfigsManager.effects[effectType];
+            var effect = Factory.Create(effectType);
             effect.Execute(_owner, level);
             _effects.Add(effectType, effect);
             _effectKeys.Add(effectType);
@@ -63,10 +62,10 @@ namespace Effects.Core
 
         public void RemoveEffect(Effect effect)
         {
-            _effects.Remove(effect.type);
-            _effectKeys.Remove(effect.type);
+            _effects.Remove(effect.config.type);
+            _effectKeys.Remove(effect.config.type);
             
-            Debug.Log($"Removed effect {effect.type}.");
+            Debug.Log($"Removed effect {effect.config.type}.");
         }
 
         public void ApplyEffects(StatType type, ref float basicValue)

@@ -13,51 +13,99 @@ MonoBehaviour:
   m_Name: UnitInventoryData
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 164a52a30de6f49dbba13c967705df2d, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - config: {fileID: 11400000, guid: e01a63685bc3c4243987a3d22995b867, type: 2}
+    count: 35
+  - config: {fileID: 11400000, guid: 480b9643ca81f484c8dab926a105d317, type: 2}
+    count: 1
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 11400000, guid: 164a52a30de6f49dbba13c967705df2d, type: 2}
+    count: 1
+  - config: {fileID: 11400000, guid: e01a63685bc3c4243987a3d22995b867, type: 2}
+    count: 24
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 11400000, guid: baf95b5448c2c40b48b68621b62bdd9c, type: 2}
+    count: 7
+  - config: {fileID: 11400000, guid: 7461c7c9f939f486fa15ceb9fb876daf, type: 2}
+    count: 9
+  - config: {fileID: 11400000, guid: baf95b5448c2c40b48b68621b62bdd9c, type: 2}
+    count: 5
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0
+  - config: {fileID: 0}
+    count: 0

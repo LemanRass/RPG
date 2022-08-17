@@ -9,17 +9,17 @@ namespace Configs
     {
         public static Dictionary<TalentType, TalentLevelsConfig> talentsLevels { get; private set; }
         public static Dictionary<StatType, StatLevelsConfig> statsLevels { get; private set; }
-        public static Dictionary<EffectType, Effect> effects { get; private set; }
+        //public static Dictionary<EffectType, Effect> effects { get; private set; }
 
         
         static ConfigsManager()
         {
             LoadTalents();
             LoadStats();
-            LoadEffects();
+            //LoadEffects();
         }
 
-        private static void LoadEffects()
+        /*private static void LoadEffects()
         {
             effects = new Dictionary<EffectType, Effect>();
             var effectsConfigs = Resources.LoadAll<Effect>("Configs/Effects");
@@ -31,7 +31,7 @@ namespace Configs
             }
             
             Debug.Log($"[ConfigsManager]Loaded {effects.Count} effects.");
-        }
+        }*/
         
         private static void LoadTalents()
         {

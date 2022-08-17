@@ -9,34 +9,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b9edf02d894cbf960b6dd232fb58ca, type: 3}
-  m_Name: DamageBuffEffect
+  m_Script: {fileID: 11500000, guid: 8e1f1432d4ca43fc9f89037b0e695c5a, type: 3}
+  m_Name: DamageBuffEffectConfig
   m_EditorClassIdentifier: 
-  name: DamageBuff
-  icon: {fileID: 0}
   type: 2
+  name: Damage Buff Effect
+  icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   _levels:
   - stats:
     - statType: 1
-      rawValue: 2
+      rawValue: 5
       percentValue: 0
     - statType: 2
-      rawValue: 4
+      rawValue: 5
       percentValue: 0
-    duration: 5
+    duration: 3
   - stats:
     - statType: 1
-      rawValue: 4
+      rawValue: 10
       percentValue: 0
-    - statType: 2
-      rawValue: 6
+    - statType: 0
+      rawValue: 10
       percentValue: 0
-    duration: 7
+    duration: 6
   - stats:
     - statType: 1
-      rawValue: 6
+      rawValue: 15
       percentValue: 0
-    - statType: 2
-      rawValue: 8
+    - statType: 0
+      rawValue: 15
       percentValue: 0
-    duration: 10
+    duration: 9

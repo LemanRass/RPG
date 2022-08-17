@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e40e0b787bb41fcae935a0cc4ff6e8f, type: 3}
   m_Name: MetalHetchet
   m_EditorClassIdentifier: 
-  type: 0
-  name: 
-  icon: {fileID: 0}
+  type: 1
+  name: Metal Hatched
+  icon: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
   onGroundPrefab: {fileID: 0}
-  count: 0
-  maxCount: 0
-  onUnitPrefab: {fileID: 0}
+  maxCount: 1
+  onUnitPrefab: {fileID: 4431170907196159119, guid: dbb19dd1d76db4eff8a95c8834d02e8e, type: 3}
   equipmentType: 0
   stats: []

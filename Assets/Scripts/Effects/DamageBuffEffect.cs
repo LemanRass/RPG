@@ -1,40 +1,26 @@
-using System;
-using System.Collections.Generic;
+using Configs.Effects;
 using Effects.Core;
 using Enums;
 using UnityEngine;
 
 namespace Effects
 {
-    [Serializable]
-    public class DamageBuffStatLevel
-    {
-        public StatType statType;
-        public float rawValue;
-        public float percentValue;
-    }
-    
-    [Serializable]
-    public class DamageBuffEffectLevel
-    {
-        public List<DamageBuffStatLevel> stats;
-        public float duration;
-    }
-    
-    [CreateAssetMenu(fileName = "DamageBuffEffect", menuName = "Unit/Effects/DamageBuffEffect")]
     public class DamageBuffEffect : Effect
     {
-        public List<DamageBuffEffectLevel> _levels;
+        public new readonly DamageBuffEffectConfig config;
+        public DamageBuffEffect(DamageBuffEffectConfig config) : base(config)
+        {
+            this.config = config;
+        }
 
         private Unit _owner;
         private DamageBuffEffectLevel _level;
-
         private float _durationTicks;
         
         public override void Execute(Unit owner, int level)
         {
             _owner = owner;
-            _level = _levels[level - 1];
+            _level = config._levels[level - 1];
             _durationTicks = 0.0f;            
             isFinished = false;
         }

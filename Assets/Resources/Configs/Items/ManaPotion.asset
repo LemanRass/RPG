@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60753cc21c6466daf15cbe6c9ee69d7, type: 3}
   m_Name: ManaPotion
   m_EditorClassIdentifier: 
-  type: 0
-  name: 
-  icon: {fileID: 0}
+  type: 8
+  name: Small Mana Potion
+  icon: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
   onGroundPrefab: {fileID: 0}
-  maxCount: 0
-  effect: {fileID: 0}
-  effectLevel: 0
+  maxCount: 10
+  effectType: 0
+  effectLevel: 1

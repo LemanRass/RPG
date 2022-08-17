@@ -9,25 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88d26c740bf48368d7fa9bfc36ef6ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 8af785d590754711a6d6d0474fe7720e, type: 3}
   m_Name: AcidEffect
   m_EditorClassIdentifier: 
-  name: Acid impact
-  icon: {fileID: 0}
   type: 0
+  name: Acid
+  icon: {fileID: 21300000, guid: 5d9ba4e7d0964044ea54abe409d81dfd, type: 3}
   levels:
-  - duration: 2.1
-    interval: 1
-    damage: 2
-  - duration: 3.1
-    interval: 1
-    damage: 3
-  - duration: 3.1
-    interval: 1
-    damage: 4
-  - duration: 5.1
+  - duration: 2
     interval: 1
     damage: 5
-  - duration: 6.1
+  - duration: 3
     interval: 1
-    damage: 6
+    damage: 10
+  - duration: 4
+    interval: 1
+    damage: 15
