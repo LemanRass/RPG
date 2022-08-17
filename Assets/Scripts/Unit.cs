@@ -1,6 +1,6 @@
 using BasicStats;
 using BasicStats.Data;
-using Configs.Items.Core;
+using Data.Items;
 using Effects.Core;
 using Enums;
 using Equipment;
@@ -92,6 +92,10 @@ public class Unit : MonoBehaviour
             case EquipmentItemData equipmentItem:
                 inventorySlot.Clear();
                 EquipItem(equipmentItem);
+                break;
+            
+            case RemedyItemData remedyItem:
+                remedyItem.Use(this);
                 break;
         }
     }

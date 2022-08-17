@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Data.Items;
 using Equipment;
-using Inventory.Data;
 using UnityEngine;
 
-namespace Configs.Items.Core
+namespace Configs.Items
 {
     [CreateAssetMenu(fileName = "EquipmentItemConfig", menuName = "Unit/Items/EquipmentItemConfig")]
     public class EquipmentItemConfig : ItemConfig

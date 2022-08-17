@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Configs.Items;
-using Configs.Items.Core;
+using Data.Items;
 using Enums;
 using Inventory;
-using Inventory.Data;
 
 namespace Equipment
 {

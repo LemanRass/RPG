@@ -1,9 +1,9 @@
 using System;
+using Data.Items;
 using Enums;
-using Inventory.Data;
 using UnityEngine;
 
-namespace Configs.Items.Core
+namespace Configs.Items
 {
     [Serializable]
     public class ItemStat

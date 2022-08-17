@@ -1,4 +1,5 @@
-using Configs.Items.Core;
+using Data.Items;
+using Interfaces;
 using Inventory;
 using Inventory.Data;
 using TMPro;
@@ -42,13 +43,10 @@ namespace UI.Game
                 _itemImg.sprite = inventoryItem.config.icon;
                 _itemImg.gameObject.SetActive(true);
 
-                if (inventoryItem is ResourceItemData resourceItem)
+                if (inventoryItem is ICountableItem countableItem)
                 {
-                    if (resourceItem.config.maxCount > 1)
-                    {
-                        _itemCount.gameObject.SetActive(true);
-                        _itemCount.text = resourceItem.count.ToString();
-                    }
+                    _itemCount.gameObject.SetActive(true);
+                    _itemCount.text = countableItem.count.ToString();
                 }
                 else
                 {

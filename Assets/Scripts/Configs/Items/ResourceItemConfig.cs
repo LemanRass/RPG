@@ -1,7 +1,7 @@
-using Inventory.Data;
+using Data.Items;
 using UnityEngine;
 
-namespace Configs.Items.Core
+namespace Configs.Items
 {
     [CreateAssetMenu(fileName = "ResourceItemConfig", menuName = "Unit/Items/ResourceItemConfig")]
     public class ResourceItemConfig : ItemConfig

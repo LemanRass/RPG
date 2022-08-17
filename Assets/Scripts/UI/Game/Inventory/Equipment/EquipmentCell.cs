@@ -1,5 +1,5 @@
 using Configs;
-using Configs.Items.Core;
+using Data.Items;
 using Equipment;
 using Inventory.Data;
 using TMPro;

@@ -1,6 +1,6 @@
 using System;
 using Configs.Items;
-using Configs.Items.Core;
+using Data.Items;
 using Inventory.Data;
 
 namespace Inventory
@@ -42,6 +42,9 @@ namespace Inventory
 
         private void OnChanged()
         {
+            if (item is { count: < 1 })
+                Clear();
+            
             onChanged?.Invoke(item);
         }
     }
