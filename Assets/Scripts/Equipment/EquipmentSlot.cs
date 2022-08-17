@@ -1,5 +1,5 @@
 using System;
-using Configs.Items.Core;
+using Inventory.Data;
 using UnityEngine;
 
 namespace Equipment
@@ -7,19 +7,20 @@ namespace Equipment
     public class EquipmentSlot : MonoBehaviour
     {
         public EquipmentType equipmentType;
-        public IEquipment item;
+        public EquipmentItemData equipmentItem { get; private set; }
+        public bool isEmpty => equipmentItem == null;
+
         private GameObject _itemGameObject;
-        public bool isEmpty => item == null;
+        
+        public event Action<EquipmentItemData> onChanged;
 
-        public event Action<IEquipment> onChanged;
-
-        public void Insert(IEquipment item)
+        public void Insert(EquipmentItemData item)
         {
-            this.item = item;
+            equipmentItem = item;
 
-            if (item != null && item.onUnitPrefab != null)
+            if (item != null && item.config.onUnitPrefab != null)
             {
-                _itemGameObject = Instantiate(item.onUnitPrefab, transform);
+                _itemGameObject = Instantiate(item.config.onUnitPrefab, transform);
                 _itemGameObject.transform.localPosition = Vector3.zero;
                 _itemGameObject.transform.localRotation = Quaternion.identity;
                 _itemGameObject.transform.localScale = Vector3.one;
@@ -31,9 +32,9 @@ namespace Equipment
         public void Clear()
         {
             Destroy(_itemGameObject);
-            item = null;
+            equipmentItem = null;
             
-            onChanged?.Invoke(item);
+            onChanged?.Invoke(equipmentItem);
         }
     }
 }

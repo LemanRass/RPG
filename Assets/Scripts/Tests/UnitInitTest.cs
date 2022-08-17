@@ -53,7 +53,7 @@ namespace Tests
             {
                 Assert.NotNull(playerUnit.equipment);
                 Assert.NotNull(playerUnit.equipment[equipmentType]);
-                Assert.Null(playerUnit.equipment[equipmentType].item);
+                Assert.Null(playerUnit.equipment[equipmentType].equipmentItem);
             }
 
             //Basic inventory checks
@@ -146,7 +146,7 @@ namespace Tests
                     if (equipmentSlot.isEmpty)
                         continue;
 
-                    foreach (var stat in equipmentSlot.item.stats)
+                    foreach (var stat in equipmentSlot.equipmentItem.config.stats)
                     {
                         if (stat.statType == statType)
                             stats[statType] += stat.value;

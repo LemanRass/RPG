@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92128309c5a4535a3553a6a38daccb1, type: 3}
-  m_Name: BasicSwordConfig
+  m_Script: {fileID: 11500000, guid: 0e40e0b787bb41fcae935a0cc4ff6e8f, type: 3}
+  m_Name: BasicSword
   m_EditorClassIdentifier: 
+  type: 0
   name: Basic Sword
   icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   onGroundPrefab: {fileID: 0}
-  _onUnitPrefab: {fileID: 2338693942505700605, guid: 442c0b875dc8f43c08605aadafcef94e, type: 3}
-  _equipmentType: 0
-  _stats:
-  - statType: 1
-    value: 2
-  - statType: 2
-    value: 4
+  count: 1
+  maxCount: 1
+  onUnitPrefab: {fileID: 2338693942505700605, guid: 442c0b875dc8f43c08605aadafcef94e, type: 3}
+  equipmentType: 0
+  stats: []

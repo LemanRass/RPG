@@ -1,22 +1,23 @@
 using System;
 using Configs.Items;
 using Configs.Items.Core;
+using Inventory.Data;
 
 namespace Inventory
 {
     public class InventorySlot
     {
-        public event Action<Item> onChanged;
-        public Item item;
+        public event Action<ItemData> onChanged;
+        public ItemData item;
 
         public bool isEmpty => item == null;
 
-        public InventorySlot(Item item)
+        public InventorySlot(ItemData item)
         {
             this.item = item;
         }
         
-        public void Insert(Item item)
+        public void Insert(ItemData item)
         {
             this.item = item;
             onChanged?.Invoke(item);

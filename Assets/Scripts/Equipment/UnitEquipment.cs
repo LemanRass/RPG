@@ -3,6 +3,7 @@ using Configs.Items;
 using Configs.Items.Core;
 using Enums;
 using Inventory;
+using Inventory.Data;
 
 namespace Equipment
 {
@@ -28,29 +29,29 @@ namespace Equipment
             }
         }
         
-        public void Equip(IEquipment item)
+        public void Equip(EquipmentItemData itemData)
         {
-            var slot = _equipmentSlots[item.equipmentType];
-            slot.Insert(item);
+            var slot = _equipmentSlots[itemData.config.equipmentType];
+            slot.Insert(itemData);
         }
 
         public void DeEquip(EquipmentSlot equipmentSlot)
         {
             equipmentSlot.Clear();
         }
-
+        
         public void DropInventorySlot(InventorySlot from, EquipmentSlot to)
         {
-            var fromItem = from.item;
-            var toItem = (Item)to.item;
+            if (from.isEmpty)
+                return;
 
-            if (fromItem is IEquipment equipment)
+            if (from.item is EquipmentItemData fromEquipment)
             {
-                if (equipment.equipmentType == to.equipmentType)
-                {
-                    to.Insert(equipment);
-                    from.Insert(toItem);
-                }
+                if (fromEquipment.config.equipmentType != to.equipmentType)
+                    return;
+
+                from.Insert(to.equipmentItem);
+                to.Insert(fromEquipment);
             }
         }
 
@@ -62,9 +63,9 @@ namespace Equipment
                 if (slot.isEmpty)
                     continue;
 
-                for (int j = 0; j < slot.item.stats.Count; j++)
+                for (int j = 0; j < slot.equipmentItem.config.stats.Count; j++)
                 {
-                    var stat = slot.item.stats[j];
+                    var stat = slot.equipmentItem.config.stats[j];
 
                     if (stat.statType != statType)
                         continue;

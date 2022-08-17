@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using BasicStats;
 using BasicStats.Data;
-using Configs.Items;
 using Configs.Items.Core;
 using Effects.Core;
 using Enums;
@@ -72,9 +70,9 @@ public class Unit : MonoBehaviour
         effects.AddEffect(effectType, level);
     }
 
-    private void EquipItem(IEquipment item)
+    private void EquipItem(EquipmentItemData item)
     {
-        var equipmentSlot = equipment[item.equipmentType];
+        var equipmentSlot = equipment[item.config.equipmentType];
 
         if (!equipmentSlot.isEmpty)
         {
@@ -91,7 +89,7 @@ public class Unit : MonoBehaviour
 
         switch (inventorySlot.item)
         {
-            case IEquipment equipmentItem:
+            case EquipmentItemData equipmentItem:
                 inventorySlot.Clear();
                 EquipItem(equipmentItem);
                 break;
@@ -103,10 +101,10 @@ public class Unit : MonoBehaviour
         if (equipmentSlot.isEmpty)
             return;
         
-        var item = equipmentSlot.item;
+        var item = equipmentSlot.equipmentItem;
         equipment.DeEquip(equipmentSlot);
         var inventorySlot = inventory.FindFreeSlot();
-        inventorySlot.Insert((Item)item);
+        inventorySlot.Insert(item);
     }
 
     public void DropInventorySlotIntoInventorySlot(InventorySlot from, InventorySlot to)

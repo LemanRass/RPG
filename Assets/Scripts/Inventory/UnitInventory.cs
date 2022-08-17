@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Configs;
 using Configs.Items;
 using Configs.Items.Core;
 using Equipment;
@@ -17,9 +18,20 @@ namespace Inventory
         public UnitInventory(UnitInventoryData inventoryData)
         {
             _slots = new List<InventorySlot>(inventoryData.items.Count);
+            
             for (int i = 0; i < inventoryData.items.Count; i++)
             {
-                _slots.Add(new InventorySlot(inventoryData.items[i]));
+                var inventoryItem = inventoryData.items[i];
+                if (inventoryItem.config == null)
+                {
+                    _slots.Add(new InventorySlot(null));
+                }
+                else
+                {
+                    var item = inventoryItem.config.CreateInstance();
+                    item.count = inventoryItem.count;
+                    _slots.Add(new InventorySlot(item));
+                }
             }
         }
 
@@ -34,11 +46,28 @@ namespace Inventory
 
         public void DropEquipmentSlot(EquipmentSlot from, InventorySlot to)
         {
-            var fromItem = (Item)from.item;
-            var toItem = to.item;
-        
-            from.Insert((IEquipment)toItem);
-            to.Insert(fromItem);
+            if (from.isEmpty)
+                return;
+
+            if (to.isEmpty)
+            {
+                to.Insert(from.equipmentItem);
+                from.Clear();
+            }
+            else
+            {
+                if (to.item is EquipmentItemData toEquipmentItem)
+                {
+                    var fromEquipmentType = from.equipmentItem.config.equipmentType;
+                    var toEquipmentType = toEquipmentItem.config.equipmentType;
+                    
+                    if (fromEquipmentType != toEquipmentType)
+                        return;
+                    
+                    to.Insert(from.equipmentItem);
+                    from.Insert(toEquipmentItem);
+                }
+            }
         }
         
         public InventorySlot FindFreeSlot()

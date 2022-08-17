@@ -1,5 +1,6 @@
 using Configs.Items.Core;
 using Inventory;
+using Inventory.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,12 +15,12 @@ namespace UI.Game
         [SerializeField] private TextMeshProUGUI _itemCount;
 
         public InventorySlot inventorySlot { get; private set; }
-        public Item item => inventorySlot.item;
+        public ItemData inventoryItem => inventorySlot.item;
 
-        public void Init(InventorySlot inventorySlot)
+        public void Init(InventorySlot slot)
         {
-            this.inventorySlot = inventorySlot;
-            this.inventorySlot.onChanged += InventorySlotOnChanged;
+            inventorySlot = slot;
+            inventorySlot.onChanged += InventorySlotOnChanged;
             
             _cellBtn.onClick.AddListener(OnCellClick);
             
@@ -28,21 +29,36 @@ namespace UI.Game
 
         private void Refresh()
         {
-            _itemImg.sprite = item == null ? null : item.icon;
-            _itemImg.gameObject.SetActive(item != null);
-
-            if (item is ICountable countable)
+            if (inventorySlot.isEmpty)
             {
-                _itemCount.gameObject.SetActive(true);
-                _itemCount.text = countable.count.ToString();
+                _itemImg.sprite = null;
+                _itemImg.gameObject.SetActive(false);
+
+                _itemCount.text = string.Empty;
+                _itemCount.gameObject.SetActive(false);
             }
             else
             {
-                _itemCount.gameObject.SetActive(false);
+                _itemImg.sprite = inventoryItem.config.icon;
+                _itemImg.gameObject.SetActive(true);
+
+                if (inventoryItem is ResourceItemData resourceItem)
+                {
+                    if (resourceItem.config.maxCount > 1)
+                    {
+                        _itemCount.gameObject.SetActive(true);
+                        _itemCount.text = resourceItem.count.ToString();
+                    }
+                }
+                else
+                {
+                    _itemCount.text = string.Empty;
+                    _itemCount.gameObject.SetActive(false);
+                }
             }
         }
         
-        private void InventorySlotOnChanged(Item item)
+        private void InventorySlotOnChanged(ItemData item)
         {
             Refresh();
         }

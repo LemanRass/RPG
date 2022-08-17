@@ -1,6 +1,7 @@
 using Configs;
 using Configs.Items.Core;
 using Equipment;
+using Inventory.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,13 +17,13 @@ namespace UI.Game.Inventory.Equipment
         [SerializeField] private TextMeshProUGUI _itemCount;
 
         public EquipmentSlot equipmentSlot { get; private set; }
-        public IEquipment item => equipmentSlot.item;
+        public EquipmentItemData equipmentItem => equipmentSlot.equipmentItem;
 
         
-        public void Init(EquipmentSlot equipmentSlot)
+        public void Init(EquipmentSlot slot)
         {
-            this.equipmentSlot = equipmentSlot;
-            this.equipmentSlot.onChanged += OnEquipmentSlotChanged;
+            equipmentSlot = slot;
+            equipmentSlot.onChanged += OnEquipmentSlotChanged;
             _cellBtn.onClick.AddListener(OnEquipmentCellClick);
             
             Refresh();
@@ -30,22 +31,34 @@ namespace UI.Game.Inventory.Equipment
 
         private void Refresh()
         {
-            _cellBtn.interactable = !equipmentSlot.isEmpty;
-            _itemImg.gameObject.SetActive(!equipmentSlot.isEmpty);
-            _itemImg.sprite = equipmentSlot.isEmpty ? null : ((Item)equipmentSlot.item).icon;
-
-            if (item is ICountable countable)
+            if (equipmentSlot.isEmpty)
             {
-                _itemCount.gameObject.SetActive(true);
-                _itemCount.text = countable.count.ToString();
+                _cellBtn.interactable = false;
+                _itemImg.sprite = null;
+                _itemImg.gameObject.SetActive(false);
+                _itemCount.text = string.Empty;
+                _itemCount.gameObject.SetActive(false);
             }
             else
             {
-                _itemCount.gameObject.SetActive(false);
+                _cellBtn.interactable = true;
+                _itemImg.sprite = equipmentItem.config.icon;
+                _itemImg.gameObject.SetActive(true);
+                
+                if (equipmentItem.config.maxCount > 1)
+                {
+                    _itemCount.gameObject.SetActive(true);
+                    _itemCount.text = equipmentItem.count.ToString();
+                }
+                else
+                {
+                    _itemCount.text = string.Empty;
+                    _itemCount.gameObject.SetActive(false);
+                }
             }
         }
 
-        private void OnEquipmentSlotChanged(IEquipment item)
+        private void OnEquipmentSlotChanged(EquipmentItemData itemConfig)
         {
             Refresh();
         }
