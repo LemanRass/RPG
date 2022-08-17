@@ -39,7 +39,6 @@ public class Unit : MonoBehaviour
     protected virtual void Update()
     {
         effects.Update();
-        skills.Update();
     }
 
     public float GetStat(StatType type)
@@ -59,10 +58,10 @@ public class Unit : MonoBehaviour
 
     public void UseSkill(SkillType skillType, Unit receiver)
     {
-        if (skills[skillType].CheckIfCanUseSkill(this, receiver))
-        {
-            skills.UseSkill(skillType, this, receiver);
-        }
+        //if (skills[skillType].CheckIfCanUseSkill(this, receiver))
+        //{
+        //    skills.UseSkill(skillType, this, receiver);
+        //}
     }
 
     public void AddEffect(EffectType effectType, int level)

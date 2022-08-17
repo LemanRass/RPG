@@ -1,17 +1,22 @@
 using System;
 using System.Collections.Generic;
+using Configs.Skills;
 using Enums;
 using UnityEngine;
 
 namespace Skills.Core
 {
-    public abstract class Skill : ScriptableObject
+    public abstract class Skill
     {
-        public SkillType type;
-        public TalentType talentType;
-        public List<TalentRequirement> requirements;
-        public float cooldownDuration;
-        
+        public readonly SkillConfig config;
+        public Skill(SkillConfig config)
+        {
+            this.config = config;
+        }
+
+        public abstract void Execute(Unit sender, Unit receiver);
+
+        /*
         [HideInInspector] public bool isCoolingDown;
         [HideInInspector] public float cooldownTicks;
 
@@ -83,6 +88,6 @@ namespace Skills.Core
             }
 
             return skillLevel;
-        }
+        }*/
     }
 }

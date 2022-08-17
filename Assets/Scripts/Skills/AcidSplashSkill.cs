@@ -1,28 +1,21 @@
-using System;
-using System.Collections.Generic;
-using Enums;
+using Configs.Skills;
 using Skills.Core;
 using UnityEngine;
 
 namespace Skills
 {
-    [Serializable]
-    public class AcidSplashSkillLevel : SkillLevel
-    {
-        public EffectType effectType;
-        public int effectLevel;
-        public float radius;
-        public float damage;
-    }
-    
-    [CreateAssetMenu(fileName = "AcidSplashSkill", menuName = "Unit/Skills/AcidSplashSkill")]
     public class AcidSplashSkill : Skill
     {
-        public List<AcidSplashSkillLevel> levels;
+        public new readonly AcidSplashSkillConfig config;
+        public AcidSplashSkill(AcidSplashSkillConfig config) : base(config)
+        {
+            this.config = config;
+        }
 
+        
         public override void Execute(Unit sender, Unit receiver)
         {
-            var skillLevel = GetSkillLevel(sender, levels);
+            /*var skillLevel = GetSkillLevel(sender, levels);
             
             var colliders = Physics.OverlapSphere(receiver.transform.position, skillLevel.radius);
 
@@ -38,7 +31,7 @@ namespace Skills
                     Debug.Log($"[AcidSplash] Added {skillLevel.damage} damage.");
                     unit.AddEffect(skillLevel.effectType, skillLevel.effectLevel);
                 }
-            }
+            }*/
         }
     }
 }

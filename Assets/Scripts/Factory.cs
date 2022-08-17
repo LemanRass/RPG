@@ -1,15 +1,18 @@
 using System.Collections.Generic;
 using Configs.Effects;
 using Configs.Items;
+using Configs.Skills;
 using Data.Items;
 using Effects.Core;
 using Enums;
+using Skills.Core;
 using UnityEngine;
 
 public static class Factory
 {
     private static readonly Dictionary<ItemType, ItemConfig> _items;
     private static readonly Dictionary<EffectType, EffectConfig> _effects;
+    private static readonly Dictionary<SkillType, SkillConfig> _skills;
 
     static Factory()
     {
@@ -24,6 +27,12 @@ public static class Factory
             _effects.Add(effectConfig.type, effectConfig);
         
         Debug.Log($"Loaded: {_effects.Count} effects.");
+
+        _skills = new Dictionary<SkillType, SkillConfig>();
+        foreach (var skillConfig in Resources.LoadAll<SkillConfig>("Configs/Skills/"))
+            _skills.Add(skillConfig.type, skillConfig);
+        
+        Debug.Log($"Loaded: {_skills.Count} skills.");
     }
 
     public static ItemData Create(ItemType itemType)
@@ -44,5 +53,15 @@ public static class Factory
     public static T Create<T>(EffectType effectType) where T : Effect
     {
         return _effects[effectType].CreateInstance() as T;
+    }
+    
+    public static Skill Create(SkillType skillType)
+    {
+        return _skills[skillType].CreateInstance();
+    }
+    
+    public static T Create<T>(SkillType skillType) where T : Skill
+    {
+        return _skills[skillType].CreateInstance() as T;
     }
 }
