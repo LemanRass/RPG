@@ -109,16 +109,21 @@ public class Unit : MonoBehaviour
 
     public void DropInventorySlotIntoInventorySlot(InventorySlot from, InventorySlot to)
     {
-        inventory.DropInventorySlot(from, to);
+        inventory.Swap(from, to);
     }
 
     public void DropInventorySlotIntoEquipmentSlot(InventorySlot from, EquipmentSlot to)
     {
-        equipment.DropInventorySlot(from, to);
+        equipment.Swap(from, to);
     }
 
     public void DropEquipmentSlotIntoInventorySlot(EquipmentSlot from, InventorySlot to)
     {
-        inventory.DropEquipmentSlot(from, to);
+        inventory.Swap(from, to);
+    }
+
+    public void SplitInventorySlot(InventorySlot from, InventorySlot to, int count)
+    {
+        inventory.Split(from, to, count);
     }
 }

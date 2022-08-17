@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Configs;
-using Configs.Items;
-using Configs.Items.Core;
 using Equipment;
 using Inventory.Data;
 
@@ -35,8 +32,23 @@ namespace Inventory
             }
         }
 
-        public void DropInventorySlot(InventorySlot from, InventorySlot to)
+        public void Swap(InventorySlot from, InventorySlot to)
         {
+            if (from == to)
+                return;
+            
+            if (from.isEmpty)
+                return;
+
+            if (!to.isEmpty)
+            {
+                if (from.item.config.type == to.item.config.type)
+                {
+                    Merge(from, to);
+                    return;
+                }
+            }
+            
             var fromItem = from.item;
             var toItem = to.item;
         
@@ -44,7 +56,7 @@ namespace Inventory
             to.Insert(fromItem);
         }
 
-        public void DropEquipmentSlot(EquipmentSlot from, InventorySlot to)
+        public void Swap(EquipmentSlot from, InventorySlot to)
         {
             if (from.isEmpty)
                 return;
@@ -67,6 +79,63 @@ namespace Inventory
                     to.Insert(from.equipmentItem);
                     from.Insert(toEquipmentItem);
                 }
+            }
+        }
+
+        public void Split(InventorySlot from, InventorySlot to, int count)
+        {
+            if (from == to)
+                return;
+            
+            if (from.isEmpty)
+                return;
+
+            if (from.item.count < count)
+                return;
+
+            if (to.isEmpty)
+            {
+                var fromItem = from.item;
+                var toItem = fromItem.config.CreateInstance();
+                to.Insert(toItem);
+
+                fromItem.count -= count;
+                toItem.count = count;
+                
+                if (from.item.count < 1)
+                    from.Clear();
+            }
+            else
+            {
+                Merge(from, to);
+            }
+        }
+
+        public void Merge(InventorySlot from, InventorySlot to)
+        {
+            if (from == to)
+                return;
+            
+            if (from.isEmpty)
+                return;
+            
+            if (to.isEmpty)
+                return;
+
+            if (from.item.config.type != to.item.config.type)
+                return;
+
+            int totalCount = from.item.count + to.item.count;
+
+            if (totalCount > from.item.config.maxCount)
+            {
+                to.item.count = to.item.config.maxCount;
+                from.item.count = totalCount - to.item.count;
+            }
+            else
+            {
+                to.item.count = totalCount;
+                from.Clear();
             }
         }
         

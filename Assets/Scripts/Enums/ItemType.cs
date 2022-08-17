@@ -9,5 +9,7 @@ namespace Enums
         BASIC_BODY,
         BASIC_PANTS,
         BASIC_BOOTS,
+        HEALTH_POTION,
+        MANA_POTION
     }
 }

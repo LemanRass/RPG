@@ -75,7 +75,15 @@ namespace UI.Game
             {
                 var fromSlot = inventoryCellDrag.inventoryCell.inventorySlot;
                 var toSlot = inventorySlot;
-                GameManager.instance.playerUnit.DropInventorySlotIntoInventorySlot(fromSlot, toSlot);
+                
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    GameManager.instance.playerUnit.SplitInventorySlot(fromSlot, toSlot, 8);
+                }
+                else
+                {
+                    GameManager.instance.playerUnit.DropInventorySlotIntoInventorySlot(fromSlot, toSlot);    
+                }
             }
 
             var equipmentCellDrag = eventData.pointerDrag.GetComponent<EquipmentCellDrag>();

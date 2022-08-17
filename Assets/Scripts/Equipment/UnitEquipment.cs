@@ -40,7 +40,7 @@ namespace Equipment
             equipmentSlot.Clear();
         }
         
-        public void DropInventorySlot(InventorySlot from, EquipmentSlot to)
+        public void Swap(InventorySlot from, EquipmentSlot to)
         {
             if (from.isEmpty)
                 return;

@@ -16,6 +16,7 @@ namespace Equipment
 
         public void Insert(EquipmentItemData item)
         {
+            Clear();
             equipmentItem = item;
 
             if (item != null && item.config.onUnitPrefab != null)
@@ -31,9 +32,12 @@ namespace Equipment
         
         public void Clear()
         {
-            Destroy(_itemGameObject);
+            if (_itemGameObject != null)
+            {
+                Destroy(_itemGameObject);
+            }
+
             equipmentItem = null;
-            
             onChanged?.Invoke(equipmentItem);
         }
     }
