@@ -12,6 +12,7 @@ namespace Skills
 
         public Skill this[SkillType skillType] => _skills[skillType];
         public Skill this[int index] => _skills[_skillsKeys[index]];
+        public int count => _skills.Count;
         
 
         public UnitSkills()

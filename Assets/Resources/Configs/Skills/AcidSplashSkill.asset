@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   name: Acid Splash
-  icon: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7, type: 3}
+  icon: {fileID: 21300000, guid: 43932b67c71640244a46b122a525ad3a, type: 3}
   talentType: 0
   requirements:
   - talentType: 0
