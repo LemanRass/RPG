@@ -1,6 +1,6 @@
 using UI.Game.Inventory.Equipment;
 
-namespace UI
+namespace UI.Tools.UIDragDrop
 {
     public class EquipmentCellDrag : CellDrag
     {

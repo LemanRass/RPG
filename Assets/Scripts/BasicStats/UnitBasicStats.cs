@@ -30,7 +30,7 @@ namespace BasicStats
         {
             _stats = new Dictionary<StatType, BasicStat>();
             _statsKeys = new List<StatType>();
-
+            
             for (int i = 0; i < data.stats.Count; i++)
             {
                 var stat = data.stats[i];

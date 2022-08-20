@@ -10,6 +10,8 @@ namespace Enums
         BASIC_PANTS,
         BASIC_BOOTS,
         HEALTH_POTION,
-        MANA_POTION
+        MANA_POTION,
+        AXE,
+        SILVER_COIN
     }
 }

@@ -1,30 +1,32 @@
 using BasicStats;
 using BasicStats.Data;
 using Data.Items;
-using Effects.Core;
+using Effects;
 using Enums;
 using Equipment;
 using Inventory;
 using Inventory.Data;
-using Skills.Core;
+using Skills;
 using Talents;
 using Talents.Data;
 using UnityEngine;
+
 
 public class Unit : MonoBehaviour
 {
     [SerializeField] protected UnitStatsData _statsData;
     [SerializeField] protected UnitTalentsData _talentsData;
-    [SerializeField] protected UnitInventoryData _inventoryData; 
+    [SerializeField] protected UnitInventoryData _inventoryData;
 
-    public float health { get; private set; }
+    public float health;
+    public float mana;
     
-    public UnitBasicStats basicStats;
-    public UnitEffects effects;
-    public UnitTalents talents;
-    public UnitSkills skills;
-    public UnitEquipment equipment;
-    public UnitInventory inventory;
+    public UnitBasicStats basicStats { get; private set; }
+    public UnitEffects effects { get; private set; }
+    public UnitTalents talents { get; private set; }
+    public UnitSkills skills { get; private set; }
+    public UnitEquipment equipment { get; private set; }
+    public UnitInventory inventory { get; private set; }
 
     protected virtual void Awake()
     {
@@ -38,6 +40,7 @@ public class Unit : MonoBehaviour
 
     protected virtual void Update()
     {
+        skills.Update();
         effects.Update();
     }
 
@@ -58,10 +61,7 @@ public class Unit : MonoBehaviour
 
     public void UseSkill(SkillType skillType, Unit receiver)
     {
-        //if (skills[skillType].CheckIfCanUseSkill(this, receiver))
-        //{
-        //    skills.UseSkill(skillType, this, receiver);
-        //}
+        skills.UseSkill(skillType, this, receiver);
     }
 
     public void AddEffect(EffectType effectType, int level)

@@ -1,9 +1,9 @@
 using Configs.Effects;
 using Enums;
 
-namespace Effects.Core
+namespace Data.Effects
 {
-    public class Effect
+    public abstract class Effect
     {
         public readonly EffectConfig config;
         public Effect(EffectConfig config)
@@ -13,7 +13,7 @@ namespace Effects.Core
         
         public bool isFinished { get; protected set; }
 
-        public virtual void Execute(Unit owner, int level) {}
+        public abstract void Execute(Unit owner, int level);
         public virtual void Dispose() {}
         public virtual void Update() { }
         public virtual float CalculateRawValue(StatType statType) => 0.0f;

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e40e0b787bb41fcae935a0cc4ff6e8f, type: 3}
+  m_Name: BodyArmor
+  m_EditorClassIdentifier: 
+  type: 4
+  name: Body Armor
+  icon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
+  onGroundPrefab: {fileID: 6768500551283968780, guid: f7df0268d82d04652a38d64961532448, type: 3}
+  maxCount: 1
+  onUnitPrefab: {fileID: 4757757569042298120, guid: e03035d3347a3416d809981bf28e51a9, type: 3}
+  equipmentType: 3
+  stats:
+  - statType: 3
+    value: 50
+  - statType: 0
+    value: 10

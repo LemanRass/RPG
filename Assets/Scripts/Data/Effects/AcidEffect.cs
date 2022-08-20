@@ -1,8 +1,7 @@
 using Configs.Effects;
-using Effects.Core;
 using UnityEngine;
 
-namespace Effects
+namespace Data.Effects
 {
     public class AcidEffect : Effect
     {

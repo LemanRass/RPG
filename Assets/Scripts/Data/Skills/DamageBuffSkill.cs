@@ -1,7 +1,6 @@
 using Configs.Skills;
-using Skills.Core;
 
-namespace Skills
+namespace Data.Skills
 {
     public class DamageBuffSkill : Skill
     {
@@ -14,8 +13,8 @@ namespace Skills
         
         public override void Execute(Unit sender, Unit receiver)
         {
-            //var level = GetSkillLevel(sender, levels);
-            //receiver.AddEffect(level.effectType, level.effectLevel);
+            var level = GetSkillLevel(sender, config.levels);
+            receiver.AddEffect(level.effectType, level.effectLevel);
         }
     }
 }

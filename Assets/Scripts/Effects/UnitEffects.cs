@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Data.Effects;
 using Enums;
 using UnityEngine;
 
-namespace Effects.Core
+namespace Effects
 {
     public class UnitEffects
     {

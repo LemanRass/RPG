@@ -9273,6 +9273,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1712639212172158677, guid: 8e973924ab1e84240adb03441764df18, type: 3}
+      propertyPath: mana
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712639212172158677, guid: 8e973924ab1e84240adb03441764df18, type: 3}
+      propertyPath: flags
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712639212172158677, guid: 8e973924ab1e84240adb03441764df18, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1712639212172158681, guid: 8e973924ab1e84240adb03441764df18, type: 3}
       propertyPath: m_RootOrder
       value: 2

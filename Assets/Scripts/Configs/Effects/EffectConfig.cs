@@ -1,4 +1,4 @@
-using Effects.Core;
+using Data.Effects;
 using Enums;
 using UnityEngine;
 

@@ -4,6 +4,7 @@ namespace Enums
     {
         ACID,
         HEALTH_BUFF,
-        DAMAGE_BUFF
+        DAMAGE_BUFF,
+        SMALL_MANA_POTION
     }
 }

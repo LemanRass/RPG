@@ -1,9 +1,8 @@
 using Configs.Effects;
-using Effects.Core;
 using Enums;
 using UnityEngine;
 
-namespace Effects
+namespace Data.Effects
 {
     public class DamageBuffEffect : Effect
     {

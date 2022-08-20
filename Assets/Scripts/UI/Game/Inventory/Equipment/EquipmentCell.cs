@@ -3,6 +3,7 @@ using Data.Items;
 using Equipment;
 using Inventory.Data;
 using TMPro;
+using UI.Tools.UIDragDrop;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

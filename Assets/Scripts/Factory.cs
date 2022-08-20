@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using Configs.Effects;
 using Configs.Items;
 using Configs.Skills;
+using Data.Effects;
 using Data.Items;
-using Effects.Core;
+using Data.Skills;
 using Enums;
-using Skills.Core;
 using UnityEngine;
 
 public static class Factory

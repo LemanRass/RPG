@@ -1,5 +1,4 @@
 using Data.Items;
-using Effects.Core;
 using Enums;
 using UnityEngine;
 

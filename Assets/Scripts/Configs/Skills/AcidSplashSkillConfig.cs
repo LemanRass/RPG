@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Data.Skills;
 using Enums;
-using Skills;
-using Skills.Core;
 using UnityEngine;
 
 namespace Configs.Skills

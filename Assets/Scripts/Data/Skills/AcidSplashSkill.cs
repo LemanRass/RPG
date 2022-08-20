@@ -1,8 +1,7 @@
 using Configs.Skills;
-using Skills.Core;
 using UnityEngine;
 
-namespace Skills
+namespace Data.Skills
 {
     public class AcidSplashSkill : Skill
     {
@@ -12,10 +11,9 @@ namespace Skills
             this.config = config;
         }
 
-        
         public override void Execute(Unit sender, Unit receiver)
         {
-            /*var skillLevel = GetSkillLevel(sender, levels);
+            var skillLevel = GetSkillLevel(sender, config.levels);
             
             var colliders = Physics.OverlapSphere(receiver.transform.position, skillLevel.radius);
 
@@ -31,7 +29,7 @@ namespace Skills
                     Debug.Log($"[AcidSplash] Added {skillLevel.damage} damage.");
                     unit.AddEffect(skillLevel.effectType, skillLevel.effectLevel);
                 }
-            }*/
+            }
         }
     }
 }

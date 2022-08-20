@@ -7,29 +7,9 @@ public class PlayerUnit : Unit
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            UseInventorySlot(inventory[0]);
+            Debug.Log($"MaxHealth: {GetStat(StatType.MAX_HEALTH)}");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            UseInventorySlot(inventory[1]);
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            talents[TalentType.STRENGTH].level++;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            UseSkill(SkillType.DAMAGE_BUFF, this);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Debug.Log($"[Damage]: {GetStat(StatType.MELEE_MIN_DAMAGE)}/{GetStat(StatType.MELEE_MAX_DAMAGE)}");
-        }
-        
         base.Update();
     }
 }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Effects.Core;
+using Configs.Skills;
 using Enums;
 using UnityEngine;
 
@@ -9,29 +9,23 @@ namespace Configs
     {
         public static Dictionary<TalentType, TalentLevelsConfig> talentsLevels { get; private set; }
         public static Dictionary<StatType, StatLevelsConfig> statsLevels { get; private set; }
-        //public static Dictionary<EffectType, Effect> effects { get; private set; }
+        public static Dictionary<SkillType, SkillConfig> skills { get; private set; }
 
-        
         static ConfigsManager()
         {
             LoadTalents();
             LoadStats();
-            //LoadEffects();
+            LoadSkills();
         }
 
-        /*private static void LoadEffects()
+        private static void LoadSkills()
         {
-            effects = new Dictionary<EffectType, Effect>();
-            var effectsConfigs = Resources.LoadAll<Effect>("Configs/Effects");
+            skills = new Dictionary<SkillType, SkillConfig>();
+            foreach (var skillConfig in Resources.LoadAll<SkillConfig>("Configs/Skills/"))
+                skills.Add(skillConfig.type, skillConfig);
             
-            for (int i = 0; i < effectsConfigs.Length; i++)
-            {
-                var effect = effectsConfigs[i];
-                effects.Add(effect.type, effect);
-            }
-            
-            Debug.Log($"[ConfigsManager]Loaded {effects.Count} effects.");
-        }*/
+            Debug.Log($"[ConfigsManager]Loaded {skills.Count} skills.");
+        }
         
         private static void LoadTalents()
         {
