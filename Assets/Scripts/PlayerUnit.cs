@@ -14,6 +14,10 @@ public class PlayerUnit : Unit
 
     private void OnCastStarted(Skill skill)
     {
-        _animator.SetTrigger(skill.config.anim);
+        float duration = skill.config.castingDuration;
+        float animLength = skill.config.anim.length;
+        
+        _animator.SetFloat("CastSpeed", animLength / duration);
+        _animator.SetTrigger(skill.config.anim.name);
     }
 }

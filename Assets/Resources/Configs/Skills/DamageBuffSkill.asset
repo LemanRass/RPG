@@ -15,13 +15,13 @@ MonoBehaviour:
   type: 1
   name: Damage Buff
   icon: {fileID: 21300000, guid: e33073c12a1212141bb271ff12a51209, type: 3}
-  anim: CastProjectile
+  anim: {fileID: -203655887218126122, guid: 8cf0dbb34b64d47619cf4e6b463f397d, type: 3}
   talentType: 1
   requirements:
   - talentType: 1
     level: 1
   castingDuration: 1
-  cooldownDuration: 50
+  cooldownDuration: 10
   levels:
   - talentLevel: 1
     effectType: 2

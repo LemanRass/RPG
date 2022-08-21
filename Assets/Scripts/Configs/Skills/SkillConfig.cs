@@ -29,7 +29,7 @@ namespace Configs.Skills
         public SkillType type;
         public string name;
         public Sprite icon;
-        public string anim;
+        public AnimationClip anim;
         public TalentType talentType;
         public List<SkillTalentRequirement> requirements;
         public float castingDuration;
