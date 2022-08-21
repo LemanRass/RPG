@@ -1,15 +1,19 @@
-using Enums;
+using Data.Skills;
 using UnityEngine;
 
 public class PlayerUnit : Unit
 {
-    protected override void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log($"MaxHealth: {GetStat(StatType.MAX_HEALTH)}");
-        }
+    [SerializeField] private Animator _animator;
 
-        base.Update();
+    protected override void Start()
+    {
+        base.Start();
+        
+        skills.skillCaster.onCastStarted += OnCastStarted;
+    }
+
+    private void OnCastStarted(Skill skill)
+    {
+        _animator.SetTrigger(skill.config.anim);
     }
 }

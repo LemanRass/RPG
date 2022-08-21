@@ -13,8 +13,10 @@ namespace Skills
         public Skill this[SkillType skillType] => _skills[skillType];
         public Skill this[int index] => _skills[_skillsKeys[index]];
         public int count => _skills.Count;
-        
 
+        public SkillCaster skillCaster { get; private set; }
+        
+        
         public UnitSkills()
         {
             _skills = new Dictionary<SkillType, Skill>();
@@ -25,6 +27,8 @@ namespace Skills
                 _skills.Add(skillType, Factory.Create(skillType));
                 _skillsKeys.Add(skillType);
             }
+
+            skillCaster = new SkillCaster();
         }
 
         public void Update()
@@ -34,13 +38,22 @@ namespace Skills
                 var key = _skillsKeys[i];
                 _skills[key].Update();
             }
+            
+            skillCaster.Update();
         }
-
-        public void UseSkill(SkillType type, Unit sender, Unit receiver)
+        
+        public async void UseSkill(SkillType type, Unit sender, Unit receiver)
         {
             var skill = _skills[type];
-            skill.Execute(sender, receiver);
-            skill.BeginCooldown();
+
+            if (skill.cooldown.isCoolingDown)
+                return;
+            
+            if (await skillCaster.Cast(skill))
+            {
+                skill.Execute(sender, receiver);
+                skill.cooldown.Begin();
+            }
         }
     }
 }

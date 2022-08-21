@@ -1,3 +1,4 @@
+using System;
 using BasicStats;
 using BasicStats.Data;
 using Data.Items;
@@ -37,6 +38,8 @@ public class Unit : MonoBehaviour
         equipment = new UnitEquipment(this);
         inventory = new UnitInventory(_inventoryData);
     }
+
+    protected virtual void Start() { }
 
     protected virtual void Update()
     {

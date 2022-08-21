@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Components.Cooldown;
 using Configs.Skills;
 using UnityEngine;
 
@@ -8,48 +9,19 @@ namespace Data.Skills
     public abstract class Skill
     {
         public readonly SkillConfig config;
-
-        public event Action onCooldownStarted;
-        public event Action<float> onCooldownProgress;
-        public event Action onCooldownFinished;
-        
-        public float cooldownTicks { get; private set; }
-        public float cooldownProgress => cooldownTicks / config.cooldownDuration;
-        public bool isCoolingDown { get; private set; }
-
+        public readonly CooldownComp cooldown;
+   
         protected Skill(SkillConfig config)
         {
             this.config = config;
-        }
-
-        public void BeginCooldown()
-        {
-            cooldownTicks = 0.0f;
-            isCoolingDown = true;
-            onCooldownStarted?.Invoke();
-        }
-
-        public void FinishCooldown()
-        {
-            isCoolingDown = false;
-            onCooldownFinished?.Invoke();
+            cooldown = new CooldownComp(config.cooldownDuration);
         }
 
         public virtual void Update()
         {
-            if (isCoolingDown)
-            {
-                cooldownTicks += Time.deltaTime;
-                onCooldownProgress?.Invoke(cooldownTicks);
-
-                if (Mathf.Abs(cooldownTicks - config.cooldownDuration) < 0.01f)
-                {
-                    FinishCooldown();
-                }
-            }
+            cooldown.Update();
         }
         
-
         public bool CheckExecuteRequirements(Unit sender)
         {
             for (int i = 0; i < config.requirements.Count; i++)

@@ -29,8 +29,10 @@ namespace Configs.Skills
         public SkillType type;
         public string name;
         public Sprite icon;
+        public string anim;
         public TalentType talentType;
         public List<SkillTalentRequirement> requirements;
+        public float castingDuration;
         public float cooldownDuration;
         
         public abstract Skill CreateInstance();

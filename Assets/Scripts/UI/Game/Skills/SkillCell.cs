@@ -15,26 +15,53 @@ namespace UI.Game.Skills
         public void Init(Skill skill)
         {
             _skill = skill;
-            _skill.onCooldownStarted += OnCooldownStarted;
-            _skill.onCooldownProgress += OnCooldownProgress;
-            _skill.onCooldownFinished += OnCooldownFinished;
+            _skill.cooldown.onStarted += OnStarted;
+            _skill.cooldown.onProgress += OnProgress;
+            _skill.cooldown.onFinished += OnFinished;
 
+            var skillCaster = GameManager.instance.playerUnit.skills.skillCaster;
+            skillCaster.onCastStarted += OnCastStarted;
+            skillCaster.onCastCancelled += OnCastCancelled;
+            skillCaster.onCastCompleted += OnCastCompleted;
+            
             _skillImg.sprite = _skill.config.icon;
             _skillImg.gameObject.SetActive(_skill != null);
             _skillBtn.onClick.AddListener(OnSkillClick);
         }
 
-        private void OnCooldownStarted()
+        private void OnCastCompleted(Skill skill)
+        {
+            _skillBtn.interactable = true;
+            if (!_skill.cooldown.isCoolingDown)
+            {
+                _cooldownImg.gameObject.SetActive(false);
+            }
+        }
+
+        private void OnCastCancelled()
+        {
+            _skillBtn.interactable = true;
+            _cooldownImg.gameObject.SetActive(false);
+        }
+
+        private void OnCastStarted(Skill skill)
+        {
+            _skillBtn.interactable = false;
+            _cooldownImg.gameObject.SetActive(true);
+            _cooldownImg.fillAmount = 1.0f;
+        }
+
+        private void OnStarted()
         {
             _cooldownImg.gameObject.SetActive(true);
         }
 
-        private void OnCooldownProgress(float progress)
+        private void OnProgress(float progress)
         {
             _cooldownImg.fillAmount = 1.0f - progress;
         }
         
-        private void OnCooldownFinished()
+        private void OnFinished()
         {
             _cooldownImg.gameObject.SetActive(false);
         }
