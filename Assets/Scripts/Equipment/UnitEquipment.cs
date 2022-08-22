@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Data.Items;
 using Enums;
@@ -12,7 +13,9 @@ namespace Equipment
         public EquipmentSlot this[EquipmentType equipmentType] => _equipmentSlots[equipmentType];
         public EquipmentSlot this[int index] => _equipmentSlots[_equipmentSlotsKeys[index]];
         public int count => _equipmentSlots.Count;
-        
+
+        public event Action onEquipmentChanged; 
+
         public UnitEquipment(Unit owner)
         {
             _equipmentSlots = new Dictionary<EquipmentType, EquipmentSlot>();
@@ -31,11 +34,13 @@ namespace Equipment
         {
             var slot = _equipmentSlots[itemData.config.equipmentType];
             slot.Insert(itemData);
+            onEquipmentChanged?.Invoke();
         }
 
         public void DeEquip(EquipmentSlot equipmentSlot)
         {
             equipmentSlot.Clear();
+            onEquipmentChanged?.Invoke();
         }
         
         public void Swap(InventorySlot from, EquipmentSlot to)
@@ -50,6 +55,8 @@ namespace Equipment
 
                 from.Insert(to.equipmentItem);
                 to.Insert(fromEquipment);
+                
+                onEquipmentChanged?.Invoke();
             }
         }
 

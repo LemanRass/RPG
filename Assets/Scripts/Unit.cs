@@ -19,9 +19,13 @@ public class Unit : MonoBehaviour
     [SerializeField] protected UnitTalentsData _talentsData;
     [SerializeField] protected UnitInventoryData _inventoryData;
 
-    public float health;
-    public float mana;
-    
+    public int health;
+    public int mana;
+
+    public event Action<int> onHealthChanged;
+    public event Action<int> onManaChanged;
+
+
     public UnitBasicStats basicStats { get; private set; }
     public UnitEffects effects { get; private set; }
     public UnitTalents talents { get; private set; }
@@ -57,9 +61,10 @@ public class Unit : MonoBehaviour
         return value;
     }
 
-    public void AddDamage(float damage)
+    public void AddDamage(int damage)
     {
-        health -= damage;
+        health = Mathf.Clamp(health - damage, 0, int.MaxValue);
+        onHealthChanged?.Invoke(health);
     }
 
     public void UseSkill(SkillType skillType, Unit receiver)

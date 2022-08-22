@@ -4,6 +4,7 @@ namespace Enums
     {
         ATTACK,
         STRENGTH,
-        VITALITY
+        VITALITY,
+        INTELLIGENCE
     }
 }

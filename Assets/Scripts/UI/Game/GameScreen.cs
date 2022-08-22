@@ -1,3 +1,4 @@
+using UI.Game.HealthMana;
 using UI.Game.Skills;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ namespace UI.Game
 {
     public class GameScreen : MonoBehaviour
     {
+        [SerializeField] private HealthManaPanel _healthManaPanel;
+        [Space]
         [SerializeField] private InventoryWidget _inventoryWidget;
         [SerializeField] private Button _inventoryBtn;
         [Space]
@@ -19,6 +22,8 @@ namespace UI.Game
             
             _skillsWidget.Init();
             _skillsBtn.onClick.AddListener(OnSkillsBtnClick);
+            
+            _healthManaPanel.Init();
         }
 
         private void OnInventoryBtnClick()

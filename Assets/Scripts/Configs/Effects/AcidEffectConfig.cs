@@ -11,7 +11,7 @@ namespace Configs.Effects
     {
         public float duration;
         public float interval;
-        public float damage;
+        public int damage;
     }
     
     [CreateAssetMenu(fileName = "AcidEffect", menuName = "Unit/Effects/AcidEffect")]

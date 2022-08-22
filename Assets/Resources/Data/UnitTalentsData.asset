@@ -22,3 +22,6 @@ MonoBehaviour:
   - type: 2
     level: 1
     experience: 0
+  - type: 3
+    level: 1
+    experience: 0

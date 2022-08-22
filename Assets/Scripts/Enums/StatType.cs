@@ -5,6 +5,7 @@ namespace Enums
         MELEE_ACCURACY,
         MELEE_MIN_DAMAGE,
         MELEE_MAX_DAMAGE,
-        MAX_HEALTH
+        MAX_HEALTH,
+        MAX_MANA
     }
 }

@@ -12,7 +12,7 @@ namespace Configs.Skills
         public EffectType effectType;
         public int effectLevel;
         public float radius;
-        public float damage;
+        public int damage;
     }
     
     [CreateAssetMenu(fileName = "AcidSplashSkill", menuName = "Unit/Skills/AcidSplashSkill")]

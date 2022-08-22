@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37c649eb65de4585a257516e64dd9efa, type: 3}
-  m_Name: MaxHealthConfig
+  m_Name: MaxManaConfig
   m_EditorClassIdentifier: 
-  statType: 3
-  talentType: 2
+  statType: 4
+  talentType: 3
   values:
-  - 10
-  - 35
-  - 75
+  - 5
+  - 20
+  - 50
