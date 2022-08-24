@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: VitalityTalentConfig
   m_EditorClassIdentifier: 
   talentType: 2
-  experiences:
-  - 10
-  - 20
-  - 30
+  experiences: 0a000000140000001e00000028000000320000003c000000

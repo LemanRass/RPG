@@ -42,23 +42,6 @@ namespace Equipment
             equipmentSlot.Clear();
             onEquipmentChanged?.Invoke();
         }
-        
-        public void Swap(InventorySlot from, EquipmentSlot to)
-        {
-            if (from.isEmpty)
-                return;
-
-            if (from.item is EquipmentItemData fromEquipment)
-            {
-                if (fromEquipment.config.equipmentType != to.equipmentType)
-                    return;
-
-                from.Insert(to.equipmentItem);
-                to.Insert(fromEquipment);
-                
-                onEquipmentChanged?.Invoke();
-            }
-        }
 
         public void ApplyEquipment(StatType statType, ref float value)
         {

@@ -127,12 +127,42 @@ public class Unit : MonoBehaviour
 
     public void DropInventorySlotIntoEquipmentSlot(InventorySlot from, EquipmentSlot to)
     {
-        equipment.Swap(from, to);
+        if (from.isEmpty)
+            return;
+        
+        if (from.item is EquipmentItemData fromEquipment)
+        {
+            if (fromEquipment.config.equipmentType != to.equipmentType)
+                return;
+
+            from.Insert(to.equipmentItem);
+            equipment.Equip(fromEquipment);
+        }
     }
 
     public void DropEquipmentSlotIntoInventorySlot(EquipmentSlot from, InventorySlot to)
     {
-        inventory.Swap(from, to);
+        if (from.isEmpty)
+            return;
+
+        if (to.isEmpty)
+        {
+            to.Insert(from.equipmentItem);
+            from.Clear();
+            return;
+        }
+        
+        if (to.item is EquipmentItemData toEquipmentItem)
+        {
+            var fromEquipmentType = from.equipmentItem.config.equipmentType;
+            var toEquipmentType = toEquipmentItem.config.equipmentType;
+                
+            if (fromEquipmentType != toEquipmentType)
+                return;
+                
+            to.Insert(from.equipmentItem);
+            equipment.Equip(toEquipmentItem);
+        }
     }
 
     public void SplitInventorySlot(InventorySlot from, InventorySlot to, int count)

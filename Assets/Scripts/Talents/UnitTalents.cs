@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Configs;
 using Enums;
 using Talents.Data;
+using UnityEngine;
 
 namespace Talents
 {
@@ -26,6 +28,8 @@ namespace Talents
         public UnitTalent this[TalentType talentType] => _talents[talentType];
         public UnitTalent this[int index] => _talents[_talentsKeys[index]];
         public int count => _talents.Count;
+
+        public event Action onTalentsChanged;
         
         public UnitTalents(UnitTalentsData data)
         {
@@ -40,6 +44,23 @@ namespace Talents
             }
         }
 
+        public void AddExperience(TalentType talentType, int exp)
+        {
+            //Debug.Log($"[BEFORE] Lvl: {_talents[talentType].level} ({_talents[talentType].experience}/{ConfigsManager.talentsLevels[talentType].experiences[_talents[talentType].level - 1]})");
+            _talents[talentType].experience += exp;
+
+            while (_talents[talentType].experience >= 
+                   ConfigsManager.talentsLevels[talentType].experiences[_talents[talentType].level - 1])
+            {
+                _talents[talentType].experience -= ConfigsManager.talentsLevels[talentType]
+                    .experiences[_talents[talentType].level - 1];
+                _talents[talentType].level++;
+                onTalentsChanged?.Invoke();
+            }
+            
+            //Debug.Log($"[AFTER] Lvl: {_talents[talentType].level} ({_talents[talentType].experience}/{ConfigsManager.talentsLevels[talentType].experiences[_talents[talentType].level - 1]})");
+        }
+        
         public void ApplyTalents(StatType statType, ref float value)
         {
             var talentType = ConfigsManager.statsLevels[statType].talentType;

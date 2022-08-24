@@ -9,6 +9,7 @@ namespace Configs.Effects
         public EffectType type;
         public string name;
         public Sprite icon;
+        public ParticleSystem initEffect;
 
         public abstract Effect CreateInstance();
     }

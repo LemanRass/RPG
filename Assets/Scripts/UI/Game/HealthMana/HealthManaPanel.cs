@@ -20,7 +20,27 @@ namespace UI.Game.HealthMana
 
             _playerUnit.onHealthChanged += _ => RefreshHealth();
             _playerUnit.onManaChanged += _ => RefreshMana();
-            
+            _playerUnit.equipment.onEquipmentChanged += OnEquipmentChanged;
+            _playerUnit.effects.onEffectsChanged += OnEffectsChanged;
+            _playerUnit.talents.onTalentsChanged += OnTalentsChanged;
+            RefreshHealth();
+            RefreshMana();
+        }
+
+        private void OnTalentsChanged()
+        {
+            RefreshHealth();
+            RefreshMana();
+        }
+
+        private void OnEffectsChanged()
+        {
+            RefreshHealth();
+            RefreshMana();
+        }
+
+        private void OnEquipmentChanged()
+        {
             RefreshHealth();
             RefreshMana();
         }

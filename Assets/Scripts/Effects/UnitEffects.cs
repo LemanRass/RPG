@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Data.Effects;
 using Enums;
@@ -13,6 +14,8 @@ namespace Effects
         public Effect this[EffectType effectType] => _effects[effectType];
         public Effect this[int index] => _effects[_effectKeys[index]];
         public int count => _effects.Count;
+
+        public event Action onEffectsChanged;
         
         public UnitEffects(Unit owner)
         {
@@ -47,8 +50,16 @@ namespace Effects
             effect.Execute(_owner, level);
             _effects.Add(effectType, effect);
             _effectKeys.Add(effectType);
+
+            if (effect.config.initEffect != null)
+            {
+                var effectParticleSystem = GameObject.Instantiate(effect.config.initEffect);
+                effectParticleSystem.Emit(1);
+            }
             
             Debug.Log($"Added effect {effectType} on level {level}.");
+            
+            onEffectsChanged?.Invoke();
         }
 
         public void RemoveEffect(EffectType effectType)
@@ -67,6 +78,8 @@ namespace Effects
             _effectKeys.Remove(effect.config.type);
             
             Debug.Log($"Removed effect {effect.config.type}.");
+            
+            onEffectsChanged?.Invoke();
         }
 
         public void ApplyEffects(StatType type, ref float basicValue)

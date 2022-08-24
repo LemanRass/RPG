@@ -30,6 +30,7 @@ namespace Configs.Skills
         public string name;
         public Sprite icon;
         public AnimationClip anim;
+        public float animCastTimeMultiplier = 1.0f;
         public TalentType talentType;
         public List<SkillTalentRequirement> requirements;
         public float castingDuration;

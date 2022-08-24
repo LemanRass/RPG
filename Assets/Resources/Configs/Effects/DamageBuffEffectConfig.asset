@@ -15,6 +15,7 @@ MonoBehaviour:
   type: 2
   name: Damage Buff Effect
   icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
+  initEffect: {fileID: 198387173780336470, guid: d9467a10b94fb3b428cc539326c9579b, type: 3}
   _levels:
   - stats:
     - statType: 1
@@ -23,6 +24,9 @@ MonoBehaviour:
     - statType: 2
       rawValue: 5
       percentValue: 0
+    - statType: 3
+      rawValue: 0
+      percentValue: 2
     duration: 3
   - stats:
     - statType: 1
@@ -31,6 +35,9 @@ MonoBehaviour:
     - statType: 0
       rawValue: 10
       percentValue: 0
+    - statType: 3
+      rawValue: 0
+      percentValue: 2
     duration: 6
   - stats:
     - statType: 1
@@ -39,4 +46,7 @@ MonoBehaviour:
     - statType: 0
       rawValue: 15
       percentValue: 0
+    - statType: 3
+      rawValue: 15
+      percentValue: 2
     duration: 9

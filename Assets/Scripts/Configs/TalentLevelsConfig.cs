@@ -8,6 +8,6 @@ namespace Configs
     public class TalentLevelsConfig : ScriptableObject
     {
         public TalentType talentType;
-        public List<float> experiences;
+        public List<int> experiences;
     }
 }

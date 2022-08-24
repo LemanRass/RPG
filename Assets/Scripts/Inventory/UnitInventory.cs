@@ -57,32 +57,6 @@ namespace Inventory
             to.Insert(fromItem);
         }
 
-        public void Swap(EquipmentSlot from, InventorySlot to)
-        {
-            if (from.isEmpty)
-                return;
-
-            if (to.isEmpty)
-            {
-                to.Insert(from.equipmentItem);
-                from.Clear();
-            }
-            else
-            {
-                if (to.item is EquipmentItemData toEquipmentItem)
-                {
-                    var fromEquipmentType = from.equipmentItem.config.equipmentType;
-                    var toEquipmentType = toEquipmentItem.config.equipmentType;
-                    
-                    if (fromEquipmentType != toEquipmentType)
-                        return;
-                    
-                    to.Insert(from.equipmentItem);
-                    from.Insert(toEquipmentItem);
-                }
-            }
-        }
-
         public void Split(InventorySlot from, InventorySlot to, int count)
         {
             if (from == to)
@@ -112,7 +86,7 @@ namespace Inventory
             }
         }
 
-        public void Merge(InventorySlot from, InventorySlot to)
+        private void Merge(InventorySlot from, InventorySlot to)
         {
             if (from == to)
                 return;

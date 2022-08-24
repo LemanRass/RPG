@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: IntelligenceTalentConfig
   m_EditorClassIdentifier: 
   talentType: 3
-  experiences:
-  - 10
-  - 30
-  - 75
+  experiences: 0a0000001e0000004b0000007d000000a8000000cd000000
