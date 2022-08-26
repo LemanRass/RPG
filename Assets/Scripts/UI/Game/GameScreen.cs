@@ -1,5 +1,6 @@
 using UI.Game.HealthMana;
 using UI.Game.Skills;
+using UI.Game.Talents;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,9 @@ namespace UI.Game
         [Space]
         [SerializeField] private SkillsWidget _skillsWidget;
         [SerializeField] private Button _skillsBtn;
+        [Space] 
+        [SerializeField] private TalentsWidget _talentsWidget;
+        [SerializeField] private Button _talentsBtn;
 
         private void Start()
         {
@@ -22,6 +26,9 @@ namespace UI.Game
             
             _skillsWidget.Init();
             _skillsBtn.onClick.AddListener(OnSkillsBtnClick);
+            
+            _talentsWidget.Init();
+            _talentsBtn.onClick.AddListener(OnTalentsBtnClick);
             
             _healthManaPanel.Init();
         }
@@ -34,6 +41,11 @@ namespace UI.Game
         private void OnSkillsBtnClick()
         {
             _skillsWidget.Show();
+        }
+
+        private void OnTalentsBtnClick()
+        {
+            _talentsWidget.Show();
         }
     }
 }

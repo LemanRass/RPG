@@ -23,7 +23,17 @@ public class PlayerUnit : Unit
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            talents.AddExperience(TalentType.VITALITY, 35);
+            talents.AddExperience(TalentType.VITALITY, Random.Range(1, 35));
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            talents.AddExperience(TalentType.INTELLECT, Random.Range(1, 35));
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            talents.AddExperience(TalentType.DEFENCE, Random.Range(1, 35));
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))

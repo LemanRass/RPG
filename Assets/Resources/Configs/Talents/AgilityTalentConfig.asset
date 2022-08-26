@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d81822189a144165aefec53f5cf16d01, type: 3}
-  m_Name: IntelligenceTalentConfig
+  m_Name: AgilityTalentConfig
   m_EditorClassIdentifier: 
-  talentType: 3
-  experiences: 0a0000001e0000004b0000007d000000a8000000cd000000
+  talentType: 2
+  experiences: 0a000000140000001e00000028000000320000003c000000

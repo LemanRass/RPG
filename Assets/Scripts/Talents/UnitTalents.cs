@@ -9,10 +9,34 @@ namespace Talents
 {
     public class UnitTalent
     {
-        public TalentType talentType;
-        public int level;
-        public int experience;
+        public event Action onExperienceChanged;
+        public event Action onLevelChanged;
 
+        public readonly TalentType talentType;
+
+        public int level
+        {
+            get => _level;
+            set
+            {
+                _level = value;
+                onLevelChanged?.Invoke();
+            }
+        }
+        private int _level;
+
+        public int experience
+        {
+            get => _experience;
+            set
+            {
+                _experience = value;
+                onExperienceChanged?.Invoke();
+            }
+        }
+        private int _experience;
+
+        
         public UnitTalent(UnitTalentData data)
         {
             talentType = data.type;

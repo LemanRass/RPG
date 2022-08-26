@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MaxManaConfig
   m_EditorClassIdentifier: 
   statType: 4
-  talentType: 3
+  talentType: 6
   values:
   - 5
   - 20

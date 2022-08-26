@@ -4,7 +4,13 @@ namespace Enums
     {
         ATTACK,
         STRENGTH,
+        AGILITY,
         VITALITY,
-        INTELLIGENCE
+        DEFENCE,
+        SHOOTING,
+        INTELLECT,
+        NATURE_MAGIC,
+        LIGHT_MAGIC,
+        CHAOS_MAGIC
     }
 }

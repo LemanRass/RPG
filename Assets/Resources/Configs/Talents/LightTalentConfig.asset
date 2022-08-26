@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c649eb65de4585a257516e64dd9efa, type: 3}
-  m_Name: MaxHealthConfig
+  m_Script: {fileID: 11500000, guid: d81822189a144165aefec53f5cf16d01, type: 3}
+  m_Name: LightTalentConfig
   m_EditorClassIdentifier: 
-  statType: 3
-  talentType: 3
-  values:
-  - 10
-  - 35
-  - 75
-  - 110
-  - 145
-  - 205
+  talentType: 8
+  experiences: 0a000000140000001e00000028000000320000003c000000
