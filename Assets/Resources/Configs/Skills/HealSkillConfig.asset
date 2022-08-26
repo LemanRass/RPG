@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3802d8bb4a624582b2466cf38ff85243, type: 3}
+  m_Name: HealSkillConfig
+  m_EditorClassIdentifier: 
+  type: 2
+  name: Heal
+  icon: {fileID: 21300000, guid: 411f88b287eb8504aa08edb04c1443c6, type: 3}
+  anim: {fileID: -203655887218126122, guid: a8c3e642c9da1429486e3f778bb96a56, type: 3}
+  vfx:
+    startAtProgress: 0
+    particle: {fileID: 0}
+  talentType: 3
+  requirements: []
+  castingDuration: 3
+  cooldownDuration: 3
+  effectType: 4
+  effectLevel: 1

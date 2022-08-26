@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data.Items;
-using Equipment;
 using Inventory.Data;
 
 namespace Inventory
@@ -33,7 +32,7 @@ namespace Inventory
             }
         }
 
-        public void Swap(InventorySlot from, InventorySlot to)
+        public void Move(InventorySlot from, InventorySlot to)
         {
             if (from == to)
                 return;
@@ -50,13 +49,9 @@ namespace Inventory
                 }
             }
             
-            var fromItem = from.item;
-            var toItem = to.item;
-        
-            from.Insert(toItem);
-            to.Insert(fromItem);
+            Swap(from, to);
         }
-
+        
         public void Split(InventorySlot from, InventorySlot to, int count)
         {
             if (from == to)
@@ -68,24 +63,38 @@ namespace Inventory
             if (from.item.count < count)
                 return;
 
+            
             if (to.isEmpty)
             {
                 var fromItem = from.item;
                 var toItem = Factory.Create(fromItem.config.type);
-                to.Insert(toItem);
+                InsertItem(to, toItem);
+            }
 
-                fromItem.count -= count;
-                toItem.count = count;
-                
-                if (from.item.count < 1)
-                    from.Clear();
-            }
-            else
+            int toItemTotalCount = to.item.count + count;
+            if (toItemTotalCount > to.item.config.maxCount)
             {
-                Merge(from, to);
+                int diff = toItemTotalCount - to.item.config.maxCount;
+                count -= diff;
             }
+            
+            from.item.count -= count;
+            to.item.count += count;
+                
+            if (from.item.count < 1)
+                ClearSlot(from);
         }
 
+        
+        private void Swap(InventorySlot from, InventorySlot to)
+        {
+            var fromItem = from.item;
+            var toItem = to.item;
+        
+            InsertItem(from, toItem);
+            InsertItem(to, fromItem);
+        }
+        
         private void Merge(InventorySlot from, InventorySlot to)
         {
             if (from == to)
@@ -110,8 +119,18 @@ namespace Inventory
             else
             {
                 to.item.count = totalCount;
-                from.Clear();
+                ClearSlot(from);
             }
+        }
+
+        public void InsertItem(InventorySlot slot, ItemData itemData)
+        {
+            slot.Insert(itemData);
+        }
+        
+        public void ClearSlot(InventorySlot slot)
+        {
+            slot.Clear();
         }
         
         public InventorySlot FindFreeSlot()

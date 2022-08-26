@@ -8,7 +8,7 @@ namespace Effects
 {
     public class UnitEffects
     {
-        private readonly Unit _owner;
+        private readonly Unit _unit;
         private readonly Dictionary<EffectType, Effect> _effects;
         private readonly List<EffectType> _effectKeys;
         public Effect this[EffectType effectType] => _effects[effectType];
@@ -17,9 +17,9 @@ namespace Effects
 
         public event Action onEffectsChanged;
         
-        public UnitEffects(Unit owner)
+        public UnitEffects(Unit unit)
         {
-            _owner = owner;
+            _unit = unit;
             _effectKeys = new List<EffectType>();
             _effects = new Dictionary<EffectType, Effect>();
         }
@@ -47,7 +47,7 @@ namespace Effects
                 return;
 
             var effect = Factory.Create(effectType);
-            effect.Execute(_owner, level);
+            effect.Execute(_unit, level);
             _effects.Add(effectType, effect);
             _effectKeys.Add(effectType);
 

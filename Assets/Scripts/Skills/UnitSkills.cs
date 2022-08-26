@@ -15,9 +15,9 @@ namespace Skills
         public int count => _skills.Count;
 
         public SkillCaster skillCaster { get; private set; }
+
         
-        
-        public UnitSkills()
+        public UnitSkills(Unit unit)
         {
             _skills = new Dictionary<SkillType, Skill>();
             _skillsKeys = new List<SkillType>();
@@ -28,7 +28,7 @@ namespace Skills
                 _skillsKeys.Add(skillType);
             }
 
-            skillCaster = new SkillCaster();
+            skillCaster = new SkillCaster(unit);
         }
 
         public void Update()

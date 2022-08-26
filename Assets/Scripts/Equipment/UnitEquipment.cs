@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Data.Items;
 using Enums;
-using Inventory;
 
 namespace Equipment
 {
@@ -16,12 +15,12 @@ namespace Equipment
 
         public event Action onEquipmentChanged; 
 
-        public UnitEquipment(Unit owner)
+        public UnitEquipment(Unit unit)
         {
             _equipmentSlots = new Dictionary<EquipmentType, EquipmentSlot>();
             _equipmentSlotsKeys = new List<EquipmentType>();
             
-            var slots = owner.GetComponentsInChildren<EquipmentSlot>();
+            var slots = unit.GetComponentsInChildren<EquipmentSlot>();
             for (int i = 0; i < slots.Length; i++)
             {
                 var slot = slots[i];
@@ -30,14 +29,14 @@ namespace Equipment
             }
         }
         
-        public void Equip(EquipmentItemData itemData)
+        public void EquipItem(EquipmentItemData itemData)
         {
             var slot = _equipmentSlots[itemData.config.equipmentType];
             slot.Insert(itemData);
             onEquipmentChanged?.Invoke();
         }
 
-        public void DeEquip(EquipmentSlot equipmentSlot)
+        public void ClearSlot(EquipmentSlot equipmentSlot)
         {
             equipmentSlot.Clear();
             onEquipmentChanged?.Invoke();

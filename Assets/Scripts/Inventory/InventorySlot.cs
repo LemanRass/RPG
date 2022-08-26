@@ -1,7 +1,5 @@
 using System;
-using Configs.Items;
 using Data.Items;
-using Inventory.Data;
 
 namespace Inventory
 {
@@ -18,7 +16,6 @@ namespace Inventory
         
         public void Insert(ItemData item)
         {
-            Clear();            
             this.item = item;
             
             if (item != null)

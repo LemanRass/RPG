@@ -38,7 +38,7 @@ public class Unit : MonoBehaviour
         basicStats = new UnitBasicStats(_statsData);
         effects = new UnitEffects(this);
         talents = new UnitTalents(_talentsData);
-        skills = new UnitSkills();
+        skills = new UnitSkills(this);
         equipment = new UnitEquipment(this);
         inventory = new UnitInventory(_inventoryData);
     }
@@ -77,18 +77,6 @@ public class Unit : MonoBehaviour
         effects.AddEffect(effectType, level);
     }
 
-    private void EquipItem(EquipmentItemData item)
-    {
-        var equipmentSlot = equipment[item.config.equipmentType];
-
-        if (!equipmentSlot.isEmpty)
-        {
-            UseEquipmentSlot(equipmentSlot);
-        }
-        
-        equipmentSlot.Insert(item);
-    }
-
     public void UseInventorySlot(InventorySlot inventorySlot)
     {
         if (inventorySlot.isEmpty)
@@ -97,14 +85,16 @@ public class Unit : MonoBehaviour
         switch (inventorySlot.item)
         {
             case EquipmentItemData equipmentItem:
-                inventorySlot.Clear();
-                EquipItem(equipmentItem);
+                var equipmentSlot = equipment[equipmentItem.config.equipmentType];
+                DropInventorySlotIntoEquipmentSlot(inventorySlot, equipmentSlot);
                 break;
             
             case RemedyItemData remedyItem:
                 remedyItem.Use(this);
                 if (remedyItem.count < 1)
-                    inventorySlot.Clear();
+                {
+                    inventory.ClearSlot(inventorySlot);
+                }
                 break;
         }
     }
@@ -114,15 +104,16 @@ public class Unit : MonoBehaviour
         if (equipmentSlot.isEmpty)
             return;
         
-        var item = equipmentSlot.equipmentItem;
-        equipment.DeEquip(equipmentSlot);
         var inventorySlot = inventory.FindFreeSlot();
-        inventorySlot.Insert(item);
+        if (inventorySlot == null)
+            return;
+        
+        DropEquipmentSlotIntoInventorySlot(equipmentSlot, inventorySlot);
     }
 
     public void DropInventorySlotIntoInventorySlot(InventorySlot from, InventorySlot to)
     {
-        inventory.Swap(from, to);
+        inventory.Move(from, to);
     }
 
     public void DropInventorySlotIntoEquipmentSlot(InventorySlot from, EquipmentSlot to)
@@ -135,8 +126,8 @@ public class Unit : MonoBehaviour
             if (fromEquipment.config.equipmentType != to.equipmentType)
                 return;
 
-            from.Insert(to.equipmentItem);
-            equipment.Equip(fromEquipment);
+            inventory.InsertItem(from, to.equipmentItem);
+            equipment.EquipItem(fromEquipment);
         }
     }
 
@@ -147,8 +138,8 @@ public class Unit : MonoBehaviour
 
         if (to.isEmpty)
         {
-            to.Insert(from.equipmentItem);
-            from.Clear();
+            inventory.InsertItem(to, from.equipmentItem);
+            equipment.ClearSlot(from);
             return;
         }
         
@@ -160,8 +151,8 @@ public class Unit : MonoBehaviour
             if (fromEquipmentType != toEquipmentType)
                 return;
                 
-            to.Insert(from.equipmentItem);
-            equipment.Equip(toEquipmentItem);
+            inventory.InsertItem(to, from.equipmentItem);
+            equipment.EquipItem(toEquipmentItem);
         }
     }
 

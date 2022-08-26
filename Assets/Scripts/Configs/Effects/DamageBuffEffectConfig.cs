@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Data.Effects;
-using Effects;
 using Enums;
 using UnityEngine;
 

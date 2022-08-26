@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Data.Skills;
 using Enums;
 using UnityEngine;
@@ -25,10 +26,11 @@ public class PlayerUnit : Unit
 
     private void OnCastStarted(Skill skill)
     {
-        float duration = skill.config.castingDuration * skill.config.animCastTimeMultiplier;
+        float duration = skill.config.castingDuration;
         float animLength = skill.config.anim.length;
         
         _animator.SetFloat("CastSpeed", animLength / duration);
         _animator.SetTrigger(skill.config.anim.name);
+        
     }
 }

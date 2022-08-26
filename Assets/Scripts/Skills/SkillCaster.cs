@@ -18,9 +18,14 @@ namespace Skills
         public float castingTicks { get; private set; }
         public float castingProgress { get; private set; }
 
-
+        private Unit _unit;
         private TaskCompletionSource<bool> _promise;
 
+        public SkillCaster(Unit unit)
+        {
+            _unit = unit;
+        }
+        
         public async Task<bool> Cast(Skill skill)
         {
             if (isCasting)
@@ -30,6 +35,7 @@ namespace Skills
             
             this.skill = skill;
             castingTicks = 0.0f;
+            _isVfxCasted = false;
             isCasting = true;
             
             onCastStarted?.Invoke(skill);
@@ -62,6 +68,8 @@ namespace Skills
             }
         }
 
+        private bool _isVfxCasted;
+        
         public void Update()
         {
             if (isCasting)
@@ -69,6 +77,19 @@ namespace Skills
                 castingTicks += Time.deltaTime;
                 castingProgress = castingTicks / skill.config.castingDuration;
                 onCastingProgress?.Invoke(castingProgress);
+
+                if (!_isVfxCasted)
+                {
+                    if (castingProgress >= skill.config.vfx.startAtProgress)
+                    {
+                        if (skill.config.vfx.particle != null)
+                        {
+                            var particle = GameObject.Instantiate(skill.config.vfx.particle, _unit.transform);
+                            particle.Emit(1);
+                        }
+                        _isVfxCasted = true;
+                    }
+                }
                 
                 if (castingTicks >= skill.config.castingDuration)
                 {

@@ -23,6 +23,14 @@ namespace Configs.Skills
             return unit.talents[talentType].level >= level;
         }
     }
+
+    [Serializable]
+    public class SkillCastVFX
+    {
+        [Range(0.0f, 1.0f)]
+        public float startAtProgress;
+        public ParticleSystem particle;
+    }
     
     public abstract class SkillConfig : ScriptableObject
     {
@@ -30,7 +38,7 @@ namespace Configs.Skills
         public string name;
         public Sprite icon;
         public AnimationClip anim;
-        public float animCastTimeMultiplier = 1.0f;
+        public SkillCastVFX vfx;
         public TalentType talentType;
         public List<SkillTalentRequirement> requirements;
         public float castingDuration;
