@@ -10,7 +10,7 @@ namespace Skills
         public event Action<Skill> onCastStarted;
         public event Action<float> onCastingProgress;
         public event Action<Skill> onCastCompleted;
-        public event Action onCastCancelled;
+        public event Action<Skill> onCastCancelled;
 
         public Skill skill { get; private set; }
 
@@ -35,7 +35,6 @@ namespace Skills
             
             this.skill = skill;
             castingTicks = 0.0f;
-            _isVfxCasted = false;
             isCasting = true;
             
             onCastStarted?.Invoke(skill);
@@ -51,7 +50,7 @@ namespace Skills
                 castingTicks = 0.0f;
                 skill = null;
 
-                onCastCancelled?.Invoke();
+                onCastCancelled?.Invoke(skill);
                 _promise.SetResult(false);
             }
         }
@@ -67,8 +66,6 @@ namespace Skills
                 _promise.SetResult(true);
             }
         }
-
-        private bool _isVfxCasted;
         
         public void Update()
         {
@@ -78,19 +75,6 @@ namespace Skills
                 castingProgress = castingTicks / skill.config.castingDuration;
                 onCastingProgress?.Invoke(castingProgress);
 
-                if (!_isVfxCasted)
-                {
-                    if (castingProgress >= skill.config.vfx.startAtProgress)
-                    {
-                        if (skill.config.vfx.particle != null)
-                        {
-                            var particle = GameObject.Instantiate(skill.config.vfx.particle, _unit.transform);
-                            particle.Emit(1);
-                        }
-                        _isVfxCasted = true;
-                    }
-                }
-                
                 if (castingTicks >= skill.config.castingDuration)
                 {
                     Complete();

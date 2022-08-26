@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Components.Cooldown
+namespace Components
 {
     public class CooldownComp
     {

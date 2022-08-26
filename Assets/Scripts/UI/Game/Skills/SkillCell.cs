@@ -38,7 +38,7 @@ namespace UI.Game.Skills
             }
         }
 
-        private void OnCastCancelled()
+        private void OnCastCancelled(Skill skill)
         {
             _skillBtn.interactable = true;
             _cooldownImg.gameObject.SetActive(false);

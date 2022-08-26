@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Components.Cooldown;
+using Components;
 using Configs.Skills;
 using UnityEngine;
 

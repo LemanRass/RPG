@@ -17,8 +17,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
   anim: {fileID: -203655887218126122, guid: 8cf0dbb34b64d47619cf4e6b463f397d, type: 3}
   vfx:
-    startAtProgress: 0
-    particle: {fileID: 0}
+    startAtProgress: 0.412
+    particle: {fileID: 198055307359729732, guid: dabd0c1fb146a3f49a4f0e33fa27dba9, type: 3}
   talentType: 3
   requirements: []
   castingDuration: 2

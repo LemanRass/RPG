@@ -30,6 +30,7 @@ namespace Configs.Skills
         [Range(0.0f, 1.0f)]
         public float startAtProgress;
         public ParticleSystem particle;
+        public SkillAnchorType anchorType;
     }
     
     public abstract class SkillConfig : ScriptableObject

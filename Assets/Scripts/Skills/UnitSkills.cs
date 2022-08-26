@@ -16,7 +16,8 @@ namespace Skills
 
         public SkillCaster skillCaster { get; private set; }
 
-        
+        private readonly List<SkillAnchor> _skillAnchors;
+
         public UnitSkills(Unit unit)
         {
             _skills = new Dictionary<SkillType, Skill>();
@@ -28,6 +29,12 @@ namespace Skills
                 _skillsKeys.Add(skillType);
             }
 
+            _skillAnchors = new List<SkillAnchor>();
+            foreach (var anchor in unit.GetComponentsInChildren<SkillAnchor>())
+            {
+                _skillAnchors.Add(anchor);
+            }
+            
             skillCaster = new SkillCaster(unit);
         }
 
@@ -54,6 +61,17 @@ namespace Skills
                 skill.Execute(sender, receiver);
                 skill.cooldown.Begin();
             }
+        }
+
+        public SkillAnchor GetSkillAnchor(SkillAnchorType anchorType)
+        {
+            for (int i = 0; i < _skillAnchors.Count; i++)
+            {
+                if (_skillAnchors[i].anchorType == anchorType)
+                    return _skillAnchors[i];
+            }
+
+            return null;
         }
     }
 }
