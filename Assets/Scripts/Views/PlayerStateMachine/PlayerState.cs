@@ -26,6 +26,7 @@ namespace Views.PlayerStateMachine
                 {
                     point = hit.point;
                     _player.transform.forward = Vector3.Normalize(point - _player.transform.position);
+                    _player.movePointView.Show(point);
                     return true;
                 }
             }

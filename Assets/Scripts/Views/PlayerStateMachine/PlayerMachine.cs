@@ -10,6 +10,7 @@ namespace Views.PlayerStateMachine
         public GameObject gameObject { get; }
         public PlayerMachine machine { get; }
         public PlayerUnit unit { get; }
+        public MovePointView movePointView { get; }
     }
     
     public class PlayerMachine

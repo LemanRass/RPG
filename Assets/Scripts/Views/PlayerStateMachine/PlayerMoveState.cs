@@ -37,11 +37,14 @@ namespace Views.PlayerStateMachine
 
             var distance = Vector3.Distance(_player.transform.position, _pointToMove);
             if (distance < 0.01f)
+            {
                 _player.machine.ChangeState(new PlayerIdleState(_player));
+            }
         }
 
         public override void OnExit()
         {
+            _player.movePointView.Hide();
             _player.unit.skills.skillCaster.onCastStarted -= OnCastStarted;
         }
     }

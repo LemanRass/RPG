@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Views;
 using Views.PlayerStateMachine;
 
 public class PlayerView : MonoBehaviour, IPlayerStateMachine
@@ -7,6 +8,7 @@ public class PlayerView : MonoBehaviour, IPlayerStateMachine
     [SerializeField] private Animator _animator;
     [SerializeField] private CameraView _cameraView;
     [SerializeField] private PlayerUnit _player;
+    [SerializeField] private MovePointView _movePointView;
 
     private PlayerMachine _machine;
     
@@ -14,10 +16,12 @@ public class PlayerView : MonoBehaviour, IPlayerStateMachine
     public Animator animator => _animator;
     public PlayerMachine machine => _machine;
     public PlayerUnit unit => _player;
+    public MovePointView movePointView => _movePointView;
 
 
     private async void Start()
     {
+        _movePointView.Init();
         await UniTask.WaitUntil(() => _player.isInitialized);
         _machine = new PlayerMachine(this);
     }
