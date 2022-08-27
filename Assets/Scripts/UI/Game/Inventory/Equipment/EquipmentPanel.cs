@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Equipment;
 using UnityEngine;
 
 namespace UI.Game.Inventory.Equipment

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UI.Game.HealthMana;
 using UI.Game.Skills;
 using UI.Game.Talents;
@@ -19,8 +20,10 @@ namespace UI.Game
         [SerializeField] private TalentsWidget _talentsWidget;
         [SerializeField] private Button _talentsBtn;
 
-        private void Start()
+        private async void Start()
         {
+            await UniTask.WaitUntil(() => GameManager.instance.playerUnit.isInitialized);
+            
             _inventoryWidget.Init();
             _inventoryBtn.onClick.AddListener(OnInventoryBtnClick);
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data.Effects;
 using Enums;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Effects
 {
@@ -53,8 +54,9 @@ namespace Effects
 
             if (effect.config.initEffect != null)
             {
-                var effectParticleSystem = GameObject.Instantiate(effect.config.initEffect);
-                effectParticleSystem.Emit(1);
+                var effectParticleSystem = Object.Instantiate(effect.config.initEffect, _unit.transform);
+                effectParticleSystem.transform.localPosition = Vector3.zero;
+                effectParticleSystem.Play();
             }
             
             Debug.Log($"Added effect {effectType} on level {level}.");
