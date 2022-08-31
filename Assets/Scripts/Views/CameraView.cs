@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraView : MonoBehaviour
 {
@@ -28,7 +31,7 @@ public class CameraView : MonoBehaviour
         _distance -= Input.GetAxis("Mouse ScrollWheel") * 2;
         _distance = Mathf.Clamp(_distance, _minDistance, _maxDistance);
         
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             _x += Input.GetAxis("Mouse X") * _speed * Time.deltaTime;
             _y -= Input.GetAxis("Mouse Y") * _speed * Time.deltaTime;

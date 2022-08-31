@@ -18,7 +18,8 @@ MonoBehaviour:
   anim: {fileID: -203655887218126122, guid: a8c3e642c9da1429486e3f778bb96a56, type: 3}
   vfx:
     startAtProgress: 0
-    particle: {fileID: 0}
+    particle: {fileID: 198063110913146316, guid: 5b2f5fb010f05b0439f2df752f1358b4, type: 3}
+    anchorType: 0
   talentType: 3
   requirements: []
   castingDuration: 3
