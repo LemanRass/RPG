@@ -10,6 +10,7 @@ namespace Views
         [SerializeField] private CameraView _cameraView;
         [SerializeField] private PlayerUnit _player;
         [SerializeField] private MovePointView _movePointView;
+        [SerializeField] private EnemyPointView _enemyPointView;
 
         private PlayerMachine _machine;
     
@@ -18,11 +19,13 @@ namespace Views
         public PlayerMachine machine => _machine;
         public PlayerUnit unit => _player;
         public MovePointView movePointView => _movePointView;
+        public EnemyPointView enemyPointView => _enemyPointView;
 
 
         private async void Start()
         {
             _movePointView.Init();
+            _enemyPointView.Init();
             await UniTask.WaitUntil(() => _player.isInitialized);
             _machine = new PlayerMachine(this);
         }

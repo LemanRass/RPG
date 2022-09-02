@@ -16,8 +16,7 @@ MonoBehaviour:
   name: Basic Sword
   icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   onGroundPrefab: {fileID: 0}
-  count: 1
   maxCount: 1
-  onUnitPrefab: {fileID: 2338693942505700605, guid: 442c0b875dc8f43c08605aadafcef94e, type: 3}
+  onUnitPrefab: {fileID: 8610582016411619461, guid: 5c65bf8113b3142dab0cb475f4a05e90, type: 3}
   equipmentType: 0
   stats: []

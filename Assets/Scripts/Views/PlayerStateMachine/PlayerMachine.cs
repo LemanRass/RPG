@@ -11,6 +11,7 @@ namespace Views.PlayerStateMachine
         public PlayerMachine machine { get; }
         public PlayerUnit unit { get; }
         public MovePointView movePointView { get; }
+        public EnemyPointView enemyPointView { get; }
     }
     
     public class PlayerMachine

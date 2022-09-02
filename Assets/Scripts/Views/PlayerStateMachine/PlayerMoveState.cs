@@ -1,5 +1,7 @@
 
+using Data.Items;
 using Data.Skills;
+using Equipment;
 using UnityEngine;
 
 namespace Views.PlayerStateMachine
@@ -21,12 +23,25 @@ namespace Views.PlayerStateMachine
 
         public override void OnEnter()
         {
-            _player.animator.Play("RunForward");
+            _player.animator.SetBool("IsRunning", true);
             _player.unit.skills.skillCaster.onCastStarted += OnCastStarted;
+            _player.unit.equipment[EquipmentType.RIGHT_HAND].onChanged += OnWeaponChanged;
         }
 
+        private void OnWeaponChanged(EquipmentItemData itemData)
+        {
+            _player.animator.SetInteger("WeaponType", itemData == null ? 0 : 1);
+            _player.animator.SetTrigger("WeaponEquip");
+        }
+        
         public override void OnUpdate()
         {
+            if (CheckForChase(out var target))
+            {
+                _player.machine.ChangeState(new PlayerChasingState(_player, target));
+                return;
+            }
+            
             if (CheckForMove(out var point))
                 _pointToMove = point;
             
@@ -34,9 +49,11 @@ namespace Views.PlayerStateMachine
                 _player.transform.position, 
                 _pointToMove,
                 5.0f * Time.deltaTime);
+            
+            _player.transform.forward = Vector3.Normalize(_pointToMove - _player.transform.position);
 
             var distance = Vector3.Distance(_player.transform.position, _pointToMove);
-            if (distance < 0.01f)
+            if (distance < 0.5f)
             {
                 _player.machine.ChangeState(new PlayerIdleState(_player));
             }
@@ -44,8 +61,10 @@ namespace Views.PlayerStateMachine
 
         public override void OnExit()
         {
+            _player.animator.SetBool("IsRunning", false);
             _player.movePointView.Hide();
             _player.unit.skills.skillCaster.onCastStarted -= OnCastStarted;
+            _player.unit.equipment[EquipmentType.RIGHT_HAND].onChanged -= OnWeaponChanged;
         }
     }
 }
