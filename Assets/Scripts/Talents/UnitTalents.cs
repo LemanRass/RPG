@@ -87,9 +87,12 @@ namespace Talents
         
         public void ApplyTalents(StatType statType, ref float value)
         {
-            var talentType = ConfigsManager.statsLevels[statType].talentType;
-            int talentLevel = _talents[talentType].level;
-            value += ConfigsManager.statsLevels[statType].values[talentLevel - 1];
+            if (ConfigsManager.statsLevels.ContainsKey(statType))
+            {
+                var talentType = ConfigsManager.statsLevels[statType].talentType;
+                int talentLevel = _talents[talentType].level;
+                value += ConfigsManager.statsLevels[statType].values[talentLevel - 1];
+            }
         }
     }
 }

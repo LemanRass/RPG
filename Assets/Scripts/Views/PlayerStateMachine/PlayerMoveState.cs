@@ -1,6 +1,7 @@
 
 using Data.Items;
 using Data.Skills;
+using Enums;
 using Equipment;
 using UnityEngine;
 
@@ -26,6 +27,17 @@ namespace Views.PlayerStateMachine
             _player.animator.SetBool("IsRunning", true);
             _player.unit.skills.skillCaster.onCastStarted += OnCastStarted;
             _player.unit.equipment[EquipmentType.RIGHT_HAND].onChanged += OnWeaponChanged;
+            _player.unit.talents.onTalentsChanged += RecalculateStats;
+            _player.unit.effects.onEffectsChanged += RecalculateStats;
+            _player.unit.equipment.onEquipmentChanged += RecalculateStats;
+
+            RecalculateStats();
+        }
+
+        private void RecalculateStats()
+        {
+            _player.animator.SetFloat("MeleeAttackSpeed", _player.unit.GetStat(StatType.MELEE_ATTACK_SPEED));
+            _player.animator.SetFloat("MoveSpeed", _player.unit.GetStat(StatType.MOVE_SPEED) / 5.0f);
         }
 
         private void OnWeaponChanged(EquipmentItemData itemData)
@@ -48,7 +60,7 @@ namespace Views.PlayerStateMachine
             _player.transform.position = Vector3.MoveTowards(
                 _player.transform.position, 
                 _pointToMove,
-                5.0f * Time.deltaTime);
+                _player.unit.GetStat(StatType.MOVE_SPEED) * Time.deltaTime);
             
             _player.transform.forward = Vector3.Normalize(_pointToMove - _player.transform.position);
 
@@ -65,6 +77,9 @@ namespace Views.PlayerStateMachine
             _player.movePointView.Hide();
             _player.unit.skills.skillCaster.onCastStarted -= OnCastStarted;
             _player.unit.equipment[EquipmentType.RIGHT_HAND].onChanged -= OnWeaponChanged;
+            _player.unit.talents.onTalentsChanged -= RecalculateStats;
+            _player.unit.effects.onEffectsChanged -= RecalculateStats;
+            _player.unit.equipment.onEquipmentChanged -= RecalculateStats;
         }
     }
 }

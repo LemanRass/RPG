@@ -19,4 +19,10 @@ MonoBehaviour:
   maxCount: 1
   onUnitPrefab: {fileID: 8610582016411619461, guid: 5c65bf8113b3142dab0cb475f4a05e90, type: 3}
   equipmentType: 0
-  stats: []
+  stats:
+  - statType: 6
+    value: 3
+  - statType: 7
+    value: 10
+  - statType: 5
+    value: 0.5
