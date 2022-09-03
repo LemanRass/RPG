@@ -6,7 +6,6 @@ namespace Views.PlayerStateMachine
     public class PlayerAttackState : PlayerState
     {
         private readonly Unit _targetUnit;
-        private const float ATTACK_DURATION = 2.0f;
 
         private float _attackTicks;
 
