@@ -17,6 +17,8 @@ public class CameraView : MonoBehaviour
     
     private float _x;
     private float _y;
+
+    private bool _isDragging;
     
     private void Start()
     {
@@ -28,8 +30,14 @@ public class CameraView : MonoBehaviour
     {
         _distance -= Input.GetAxis("Mouse ScrollWheel") * 2;
         _distance = Mathf.Clamp(_distance, _minDistance, _maxDistance);
+
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            _isDragging = true;
+
+        if (Input.GetMouseButtonUp(0))
+            _isDragging = false;
         
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (_isDragging)
         {
             _x += Input.GetAxis("Mouse X") * _speed * Time.deltaTime;
             _y -= Input.GetAxis("Mouse Y") * _speed * Time.deltaTime;
