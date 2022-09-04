@@ -14,7 +14,6 @@ namespace Views.PlayerStateMachine
 
         public override void OnEnter()
         {
-            _player.enemyPointView.Show(_targetUnit);
             _player.animator.SetBool("IsRunning", true);
             
             _player.unit.talents.onTalentsChanged += RecalculateStats;
@@ -59,7 +58,6 @@ namespace Views.PlayerStateMachine
             _player.unit.effects.onEffectsChanged -= RecalculateStats;
             _player.unit.equipment.onEquipmentChanged -= RecalculateStats;
             
-            _player.enemyPointView.Hide();
             _player.animator.SetBool("IsRunning", false);
         }
     }

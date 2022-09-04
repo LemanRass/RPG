@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using UI.Game.HealthMana;
 using UI.Game.Skills;
 using UI.Game.Talents;
+using UI.Game.Target;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ namespace UI.Game
         [Space] 
         [SerializeField] private TalentsWidget _talentsWidget;
         [SerializeField] private Button _talentsBtn;
+        [Space]
+        [SerializeField] private TargetPanel _targetPanel;
 
         private async void Start()
         {
@@ -34,6 +37,8 @@ namespace UI.Game
             _talentsBtn.onClick.AddListener(OnTalentsBtnClick);
             
             _healthManaPanel.Init();
+            
+            _targetPanel.Init();
         }
 
         private void OnInventoryBtnClick()

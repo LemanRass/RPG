@@ -19,8 +19,6 @@ namespace Views.PlayerStateMachine
 
         public override void OnEnter()
         {
-            _player.enemyPointView.Show(_targetUnit);
-            
             _player.unit.talents.onTalentsChanged += RecalculateStats;
             _player.unit.effects.onEffectsChanged += RecalculateStats;
             _player.unit.equipment.onEquipmentChanged += RecalculateStats;
@@ -58,6 +56,7 @@ namespace Views.PlayerStateMachine
                     return;
                 }
                 
+                _targetUnit.AddDamage(1);
                 _player.animator.SetTrigger($"MeleeAttack_{Random.Range(1, 3).ToString()}");
                 _attackTicks = 0.0f;
             }
@@ -68,8 +67,6 @@ namespace Views.PlayerStateMachine
             _player.unit.talents.onTalentsChanged -= RecalculateStats;
             _player.unit.effects.onEffectsChanged -= RecalculateStats;
             _player.unit.equipment.onEquipmentChanged -= RecalculateStats;
-            
-            _player.enemyPointView.Hide();
         }
     }
 }

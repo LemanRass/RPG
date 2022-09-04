@@ -8,17 +8,31 @@ namespace Views
 
         private ParticleSystem _particle;
 
-        public Unit currentEnemy { get; private set; }
+        private PlayerUnit _playerUnit;
         
-        public void Init()
+        public void Init(PlayerUnit playerUnit)
         {
+            _playerUnit = playerUnit;
+            _playerUnit.target.onSelectionChanged += OnTargetChanged;
+            
             _particle = Instantiate(_particlePrefab);
             _particle.Stop();
         }
-        
-        public void Show(Unit unit)
+
+        private void OnTargetChanged(Unit target)
         {
-            currentEnemy = unit;
+            if (target != null)
+            {
+                Show(target);
+            }
+            else
+            {
+                Hide();
+            }
+        }
+
+        private void Show(Unit unit)
+        {
             _particle.transform.SetParent(unit.transform);
             _particle.transform.localPosition = Vector3.zero;
             _particle.transform.localRotation = Quaternion.identity;
@@ -26,9 +40,8 @@ namespace Views
             _particle.Play();
         }
 
-        public void Hide()
+        private void Hide()
         {
-            currentEnemy = null;
             _particle.transform.parent = null;
             _particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }

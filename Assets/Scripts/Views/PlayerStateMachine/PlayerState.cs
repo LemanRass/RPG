@@ -24,8 +24,25 @@ namespace Views.PlayerStateMachine
                 if (Physics.Raycast(ray, out var hit, 100.0f, ~LayerMask.NameToLayer("Enemies")))
                 {
                     target = hit.transform.GetComponent<Unit>();
-                    return target != null;
+                    if (target != null)
+                    {
+                        if (target == _player.unit.target.selected)
+                            return true;
+                        
+                        _player.unit.target.Select(target);
+                        return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (_player.unit.target.selected != null)
+                    _player.unit.target.Clear();
             }
 
             target = null;

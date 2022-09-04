@@ -24,15 +24,16 @@ namespace Views
 
         private async void Start()
         {
-            _movePointView.Init();
-            _enemyPointView.Init();
             await UniTask.WaitUntil(() => _player.isInitialized);
+
+            _movePointView.Init();
+            _enemyPointView.Init(unit);
             _machine = new PlayerMachine(this);
         }
 
         private void Update()
         {
-            _machine.Update();
+            _machine?.Update();
         }
 
         /*[SerializeField] private ParticleSystem _moveMarkerPrefab;
