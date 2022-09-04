@@ -46,8 +46,10 @@ public class PlayerUnit : Unit
         return value;
     }
     
-    public void UseSkill(SkillType skillType, Unit receiver)
+    public void UseSkill(SkillType skillType)
     {
+        var receiver = target.selected;
+        if (receiver == null) return;
         skills.UseSkill(skillType, this, receiver);
     }
     

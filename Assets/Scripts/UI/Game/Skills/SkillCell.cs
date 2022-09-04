@@ -68,7 +68,7 @@ namespace UI.Game.Skills
 
         private void OnSkillClick()
         {
-            GameManager.instance.playerUnit.UseSkill(_skill.config.type, GameManager.instance.playerUnit);
+            GameManager.instance.playerUnit.UseSkill(_skill.config.type);
         }
     }
 }

@@ -30,11 +30,15 @@ namespace Views.PlayerStateMachine
 
         public override void OnEnter()
         {
+            var receiver = _player.unit.target.selected;
+            var direction = Vector3.Normalize(receiver.transform.position - _player.transform.position);
+            _player.transform.forward = direction;
+            
             float duration = _skill.config.castingDuration;
             float animLength = _skill.config.anim.length;
 
             _player.animator.SetFloat("CastSpeed", animLength / duration);
-            _player.animator.SetTrigger(_skill.config.anim.name);
+            _player.animator.Play(_skill.config.anim.name);
 
             float vfxDuration = duration * _skill.config.vfx.startAtProgress;
             

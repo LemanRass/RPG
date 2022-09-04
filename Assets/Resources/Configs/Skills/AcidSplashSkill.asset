@@ -15,8 +15,11 @@ MonoBehaviour:
   type: 0
   name: Acid Splash
   icon: {fileID: 21300000, guid: 43932b67c71640244a46b122a525ad3a, type: 3}
-  anim: {fileID: -203655887218126122, guid: 8cf0dbb34b64d47619cf4e6b463f397d, type: 3}
-  animCastTimeMultiplier: 1
+  anim: {fileID: -203655887218126122, guid: 6f2ab477c18674d899ce1a9176c55c27, type: 3}
+  vfx:
+    startAtProgress: 0
+    particle: {fileID: 0}
+    anchorType: 0
   talentType: 0
   requirements:
   - talentType: 0

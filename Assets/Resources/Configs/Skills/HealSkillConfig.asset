@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 2
   name: Heal
   icon: {fileID: 21300000, guid: 411f88b287eb8504aa08edb04c1443c6, type: 3}
-  anim: {fileID: -203655887218126122, guid: a8c3e642c9da1429486e3f778bb96a56, type: 3}
+  anim: {fileID: -203655887218126122, guid: b9a26c858010d45038b957d5bcb597d6, type: 3}
   vfx:
     startAtProgress: 0
     particle: {fileID: 198063110913146316, guid: 5b2f5fb010f05b0439f2df752f1358b4, type: 3}

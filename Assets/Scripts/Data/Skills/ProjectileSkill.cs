@@ -1,13 +1,12 @@
 using Configs.Skills;
 using UnityEngine;
+using Views;
 
 namespace Data.Skills
 {
     public class ProjectileSkill : Skill
     {
         public new readonly ProjectileSkillConfig config;
-
-        private GameObject _projectile;
         
         public ProjectileSkill(ProjectileSkillConfig config) : base(config)
         {
@@ -16,18 +15,14 @@ namespace Data.Skills
 
         public override void Execute(Unit sender, Unit receiver)
         {
-            //_projectile = GameObject.Instantiate(config.projectilePrefab);
-        }
-
-        public override void Update()
-        {
-            base.Update();
-
-            if (_projectile != null)
+            var projectile = Object.Instantiate(config.projectilePrefab);
+            var skillAnchor = ((PlayerUnit)sender).skills.GetSkillAnchor(config.vfx.anchorType);
+            projectile.transform.position = projectile.transform.TransformPoint(skillAnchor.transform.position);
+            projectile.transform.forward = skillAnchor.transform.forward;
+            projectile.Init(receiver, this, () =>
             {
-                _projectile.transform.position +=
-                    _projectile.transform.forward * (config.projectileSpeed * Time.deltaTime);
-            }
+                receiver.AddDamage(1);
+            });
         }
     }
 }

@@ -15,13 +15,14 @@ MonoBehaviour:
   type: 3
   name: Fireball
   icon: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
-  anim: {fileID: -203655887218126122, guid: 8cf0dbb34b64d47619cf4e6b463f397d, type: 3}
+  anim: {fileID: -203655887218126122, guid: 0e8f153489c5d4aa5b4c5ce2ccc78f80, type: 3}
   vfx:
-    startAtProgress: 0.412
-    particle: {fileID: 198055307359729732, guid: dabd0c1fb146a3f49a4f0e33fa27dba9, type: 3}
+    startAtProgress: 0
+    particle: {fileID: 198159042948810794, guid: be9c39cbc79c30349b1067bae216e1ef, type: 3}
+    anchorType: 0
   talentType: 3
   requirements: []
   castingDuration: 2
   cooldownDuration: 3
-  projectilePrefab: {fileID: 1487245307642514, guid: dabd0c1fb146a3f49a4f0e33fa27dba9, type: 3}
+  projectilePrefab: {fileID: 3481230006180502901, guid: dabd0c1fb146a3f49a4f0e33fa27dba9, type: 3}
   projectileSpeed: 10
